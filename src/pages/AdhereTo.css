@@ -1,0 +1,55 @@
+.AdhereToTitle{
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 80px 0 40px 120px;
+}
+
+.AdhereToh2{
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 80px 0 40px 130px;
+    max-width: 650px;
+}
+
+.wsppbuisness{
+    margin: 60px 0px 120px 130px;
+}
+/* Evitar scroll horizontal */
+html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Scrollbar general */
+  ::-webkit-scrollbar {
+    width: 10px; /* Grosor de la scrollbar */
+  }
+  
+  /* Ocultar las flechas de la scrollbar */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  /* Fondo de la scrollbar */
+  ::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Gris claro */
+    border-radius: 50px; /* Redondeo del fondo */
+  }
+  
+  /* Barra de desplazamiento (completamente redonda) */
+  ::-webkit-scrollbar-thumb {
+    background: #b0b0b0; /* Gris oscuro */
+    border-radius: 9999px; /* Completamente redondo */
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* Hover en la barra */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #909090; /* Oscurece un poco al pasar el mouse */
+  }
+  
+  /* Scrollbar para Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #b0b0b0 #e0e0e0;
+  }
+  

@@ -1,0 +1,8 @@
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Ahora hay exactamente 4 columnas */
+    gap: 20px;
+    justify-content: center;
+    padding: 30px 100px;
+  }
+  

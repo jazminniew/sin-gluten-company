@@ -1,0 +1,68 @@
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  /* Espacio entre filas */
+    
+  }
+  
+  .tabs {
+    display: flex;
+    background: white;
+    padding: 4px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .second-row {
+    margin-top: 12px; /* Espacio entre filas */
+  }
+  
+  .third-row {
+    margin-top: 12px; /* Espacio antes de la tercera fila */
+    justify-content: center; /* Centra el único tab */
+  }
+  
+  .tab {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: background 0.3s ease-in-out;
+    border-radius: 12px;
+    padding: 30px 60px;
+  }
+
+  .tab {
+    display: flex;
+    flex-direction: column; /* Alinea el icono arriba y el texto abajo */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+  }
+  
+  .tab.active {
+    background: #e0e0e0; /* Fondo gris al seleccionar */
+  }
+  
+  .single-tab {
+    width: 300px; /* Hace que la tercera fila ocupe todo el ancho */
+    text-align: center;
+  }
+
+
+  
+  /* Segunda fila: padding más pequeño */
+  .second-row .tab {
+    padding: 30px 76px;
+  }
+  
+  .tab ion-icon {
+    font-size: 32px; /* Aumenta el tamaño del icono */
+    margin-bottom: 8px; /* Espacio entre el icono y el texto */
+    
+  }
+  
