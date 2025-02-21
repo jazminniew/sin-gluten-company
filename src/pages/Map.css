@@ -1,0 +1,19 @@
+.map-container {
+    width: 100%;
+    max-width: 900px; /* Ajusta el máximo según tu diseño */
+    margin: 20px auto;
+}
+
+iframe {
+    width: 100%;
+    height: 50vh; /* La mitad de la pantalla */
+    min-height: 400px; /* Para que no sea demasiado pequeño */
+    border-radius: 30px;
+    border: 8px solid #F5F6F8; /* Borde blanco */
+}
+
+.mapTitle{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 20px 0 30px 200px;
+}

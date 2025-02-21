@@ -6,6 +6,10 @@ import Home from './pages/Home';
 import Category from './pages/Category';
 import AdhereTo from './pages/AdhereTo';
 import Faq from './pages/Faq'; 
+import ContactUs from './pages/ContactUs'; 
+import Map from './pages/Map';
+import About from './pages/About';
+
 import ScrollToTop from "./components/ScrollToTop"; 
 
 const App = () => {
@@ -17,11 +21,14 @@ const App = () => {
       <main>
         <Routes>
         
-          <Route path="/" element={<Home />} /> {/* 👈 Asegúrate de que la home sea correcta */}
-          <Route path="/faq" element={<Faq />} /> {/* 👈 Ahora está bien escrito */}
+          <Route path="/" element={<Home />} /> 
+          <Route path="/faq" element={<Faq />} /> 
           <Route path="/category" element={<Category />} /> 
           <Route path="/adherir" element={<AdhereTo />} />
           <Route path="/AdhereTo" element={<AdhereTo />} />
+          <Route path="/contacto" element={<ContactUs />} /> 
+          <Route path="/map" element={<Map />} /> 
+          <Route path="/about" element={<About />} /> 
         </Routes>
       </main>
 

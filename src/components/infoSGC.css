@@ -1,0 +1,58 @@
+.info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 900px;
+    margin: 40px auto;
+  }
+  
+  .info-text {
+    max-width: 50%;
+  }
+  
+  .info-text h2 {
+    font-size: 24px;
+    color: #000;
+    font-weight: 500;
+  }
+  
+  .info-text span {
+    color: #007b8f;
+  }
+  
+  .info-text p {
+    font-size: 16px;
+    color: #666;
+    
+  }
+  
+  .info-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+  }
+  
+  .icon-box {
+    background-color: #007b8f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 0px;
+    height: 80px;
+  }
+  
+  .icon-box img {
+    width: 20px;
+    height: 40px;
+  }
+
+  .group2{
+    margin-top: 20px;
+  }
+
+  .secondTitle{
+    font-weight: 500;
+    font-size: 30px;
+  }

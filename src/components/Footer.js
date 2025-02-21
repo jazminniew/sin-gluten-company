@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="footer-help">
           <h3>AYUDA</h3>
           <ul>
-            <li><Link to="/que-es-sgc">¿Qué es SGC?</Link></li>
+            <li><Link to="/about">¿Qué es SGC?</Link></li>
             <li><Link to="/faq">Preguntas Frecuentes (FAQ)</Link></li>
             <li><Link to="/terminos">Términos y Condiciones</Link></li>
             <li><Link to="/contacto">Contáctanos</Link></li>

@@ -90,7 +90,13 @@ const Home = () => {
 
       </div>
       <div className="info-cards">
-  <Card title="Cerca mío" icon="location-outline" buttonText="Ver más" />
+      <Card 
+  title="Cerca mío" 
+  icon="location-outline" 
+  buttonText="Ver más" 
+  link="/map"
+/>
+
   <Card 
   title="Suscribite" 
   icon="mail-outline" 

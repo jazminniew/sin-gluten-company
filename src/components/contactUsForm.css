@@ -1,0 +1,93 @@
+.contact-container {
+    display: flex;
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 80px auto;
+  }
+  
+  
+  .contact-info {
+    width: 33%;
+    background: #00838f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .contact-info h3 {
+    margin-bottom: 15px;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+  }
+  
+  ion-icon {
+    margin-right: 10px;
+    font-size: 25px;
+  }
+  
+  .contact-form {
+    padding: 20px;
+
+  }
+  
+  .contact-form h2 {
+    color: #00838f;
+    font-size: 30px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    flex: 1;
+  }
+  
+  .input-field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .submit-button {
+    background: #00838f;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .submit-button:hover {
+    background: #006064;
+  }
+  .form-input {
+    margin-bottom: 10px !important; /* Ajusta el valor según el espacio deseado */
+}
