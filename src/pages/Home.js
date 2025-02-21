@@ -18,17 +18,13 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Imagen principal */}
       <div className="image-wrapper">
-        {/* <img src="/Images/fake-promo.png" alt="Promoción" /> */}
       </div>
 
-      {/* Filtros */}
       <div className="filters-container">
         <Filter />
       </div>
 
-      {/* Buscador */}
       <div className="search-container">
         <div className="search-box">
           <div className="search-input" onClick={() => setShowDropdown(false)}>
@@ -60,7 +56,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Blue Section con Swiper */}
       <div className="blue-section">
       <Swiper
   effect="coverflow"
@@ -68,13 +63,13 @@ const Home = () => {
   centeredSlides={true}
   slidesPerView="auto"
   loop={true}
-  autoplay={{ delay: 5500, disableOnInteraction: false }} // GIRA AUTOMÁTICAMENTE
+  autoplay={{ delay: 5500, disableOnInteraction: false }} 
   coverflowEffect={{
     rotate: 0,
     stretch: 0,
     depth: 400,
     modifier: 3,
-    slideShadows: false, // Sin sombras para un look más limpio
+    slideShadows: false,
   }}
   modules={[EffectCoverflow, Autoplay]}
   className="mySwiper"
@@ -111,9 +106,6 @@ const Home = () => {
 
   <Card title="Shop" icon="cart-outline" buttonText="Ver más" />
 </div>
-
-     
-
       <div className="logos-container">
   <div className="logos-slide">
     <img src={logo} alt="Empresa 1"/>

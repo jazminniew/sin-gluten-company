@@ -57,8 +57,8 @@ const Filter = () => {
           className={`tab single-tab ${index === 8 ? "active" : ""}`}
           onClick={() => handleClick(8)}
         >
-          <ion-icon name={tabs[8].icon}></ion-icon> {/* ✅ Accediendo a tabs[8] directamente */}
-          <span>{tabs[8].name}</span> {/* ✅ Accediendo a tabs[8] directamente */}
+          <ion-icon name={tabs[8].icon}></ion-icon> 
+          <span>{tabs[8].name}</span> 
         </button>
       </div>
     </div>

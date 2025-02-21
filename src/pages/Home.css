@@ -220,20 +220,20 @@
 
   @media (max-width: 600px) {
     .info-cards {
-      grid-template-columns: repeat(1, 1fr); /* En pantallas pequeñas, 1 sola columna */
+      grid-template-columns: repeat(1, 1fr); 
     }
   }
   .grid-links {
     display: grid;
-    grid-template-columns: 1fr; /* Cada enlace ocupa una fila */
-    gap: 15px; /* Espacio entre elementos */
+    grid-template-columns: 1fr; 
+    gap: 15px;
     text-align: center;
-    max-width: 300px; /* Ajusta según necesidad */
-    margin: 0 auto; /* Centra el contenido */
+    max-width: 300px; 
+    margin: 0 auto;
   }
   
   .link-item {
-    display: block; /* Asegura que cada enlace esté en su propia línea */
+    display: block; 
     text-decoration: none;
     color: #555;
     font-size: 1rem;
@@ -251,7 +251,7 @@
   .logos-container {
     width: 100%;
     overflow: hidden;
-    background: #f8f8f8; /* Color de fondo opcional */
+    background: #f8f8f8; 
     padding: 30px 0;
     display: flex;
     align-items: center;
@@ -270,8 +270,8 @@
   }
   
   .logos-slide img {
-    height: 80px; /* Ajusta la altura de los logos */
-    width: auto; /* Mantiene la proporción */
+    height: 80px; 
+    width: auto;
   }
   
 .searchIcon{
@@ -280,40 +280,33 @@
   font-size: 20px;
 }
 
-/* Evitar scroll horizontal */
 html, body {
   overflow-x: hidden;
 }
 
-/* Scrollbar general */
 ::-webkit-scrollbar {
-  width: 10px; /* Grosor de la scrollbar */
+  width: 10px; 
 }
 
-/* Ocultar las flechas de la scrollbar */
 ::-webkit-scrollbar-button {
   display: none;
 }
 
-/* Fondo de la scrollbar */
 ::-webkit-scrollbar-track {
-  background: #e0e0e0; /* Gris claro */
-  border-radius: 50px; /* Redondeo del fondo */
+  background: #e0e0e0; 
+  border-radius: 50px;
 }
 
-/* Barra de desplazamiento (completamente redonda) */
 ::-webkit-scrollbar-thumb {
-  background: #b0b0b0; /* Gris oscuro */
-  border-radius: 9999px; /* Completamente redondo */
+  background: #b0b0b0; 
+  border-radius: 9999px; 
   transition: background 0.3s ease-in-out;
 }
 
-/* Hover en la barra */
 ::-webkit-scrollbar-thumb:hover {
-  background: #909090; /* Oscurece un poco al pasar el mouse */
+  background: #909090; 
 }
 
-/* Scrollbar para Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #b0b0b0 #e0e0e0;

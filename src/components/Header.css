@@ -1,20 +1,16 @@
-/* Estilos del header */
 header {
   background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 60px;
-
 }
 
-/* Logo*/
 header .logo img {
   width: 60px; 
   height: auto;
 }
 
-/*Texto del nombre de la companía */
 header .company-name {
   font-size: 1.2rem;
   font-weight: bold;
@@ -27,7 +23,7 @@ header .company-name span {
 
 /* Redes sociales */
 header .social-icons a {
-  font-size: 1.8rem; /* Aumenta el tamaño de los íconos */
+  font-size: 1.8rem; 
   color: rgb(78, 78, 78);
   transition: color 0.3s;
 }
@@ -67,12 +63,12 @@ header .atc-button:hover {
 }
 
 header .container-button {
-  display: flex;  /* Añadir flexbox */
-  gap: 10px;      /* Espaciado entre botones */
+  display: flex; 
+  gap: 10px;     
 }
 
 .header-icon {
-  font-size: 24px; /* Tamaño del ícono */
-  color: #00AABA; /* Color del ícono */
-  margin-bottom: 5px; /* Espacio entre el ícono y el texto */
+  font-size: 24px; 
+  color: #00AABA; 
+  margin-bottom: 5px; 
 }

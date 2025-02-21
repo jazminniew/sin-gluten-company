@@ -66,13 +66,9 @@ const Faq = () => {
         answer="Sí, hacemos envíos a todo el país a través de diferentes transportes." 
       />
       </div>
-
-
-
-
       <Suscribe/>
     </div>
   );
 };
 
-export default Faq; // 👈 Asegúrate de que se exporta Faq (NO FAQ)
+export default Faq; 

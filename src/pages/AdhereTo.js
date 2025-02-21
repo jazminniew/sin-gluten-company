@@ -1,5 +1,5 @@
 import React from "react";
-import ContactForm from "../components/ContactForm"; // IMPORTACIÓN CORRECTA
+import ContactForm from "../components/ContactForm"; 
 import Filter from "../components/Filter";
 import "./AdhereTo.css";
 

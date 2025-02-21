@@ -9,7 +9,7 @@
 }
 
 .freq-quest:hover {
-    background-color: #f9f9f9; /* Cambio sutil al pasar el mouse */
+    background-color: #f9f9f9; 
 }
 
 .question {
@@ -34,7 +34,7 @@
 
 /* Clase activa cuando la respuesta está visible */
 .answer.open {
-    max-height: 200px; /* Ajusta este valor según el contenido */
+    max-height: 200px; 
     opacity: 1;
     margin-top: 20px;
 }

@@ -28,7 +28,6 @@ export default function Footer() {
       {/* Línea divisoria */}
       <hr />
 
-      {/* Derechos reservados */}
       <p className="footer-rights">
         © 2024 Sin Gluten Company. Todos los derechos reservados.
       </p>

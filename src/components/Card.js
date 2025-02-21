@@ -1,12 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importamos useNavigate para redirección
+import { useNavigate } from "react-router-dom"; 
 import "./Card.css";
 
 const Card = ({ image, title, description, productPath }) => {
-  const navigate = useNavigate(); // Hook para navegación
+  const navigate = useNavigate(); 
 
+   //cuando hago clic en la tarjeta, redirige a la ruta productPath
   const handleClick = () => {
-    navigate(productPath); // Redirige a la ruta del producto
+    navigate(productPath); 
   };
 
   return (

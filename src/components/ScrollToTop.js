@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
-  const location = useLocation(); // Detecta el cambio de ruta
+  const location = useLocation(); 
 
   useEffect(() => {
-    // Desplazar a la parte superior con una transición suave
     window.scrollTo({
       top: 0,
-      behavior: "smooth",  // Esto le da la animación suave
+      behavior: "smooth", 
     });
-  }, [location]); // Se ejecuta cada vez que cambia la ubicación
+  }, [location]); 
 
   return null;
 };

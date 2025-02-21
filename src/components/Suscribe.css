@@ -36,9 +36,9 @@
     background-color: #007c85;
     transition: background 0.3s ease, transform 0.2s ease;
   }
-  /* Flip animation on hover */
+
 .flip-container {
-    width: 450px;  /* Antes era 200px, ahora es más ancha */
+    width: 450px; 
     height: 280px;
     perspective: 1000px;
     margin-top: 30px;

@@ -35,20 +35,17 @@ export default function Header() {
 
       {/* Botones */}
       <div className="container-button">
-      {/* Envuelve el botón con un Link para redirigir a AdhereTo.js */}
       <Link to="/adherir">
-
         <button className="atc-button">Adherí tu Comercio</button>
       </Link>
       
-      {/* El otro botón para solicitar tarjeta, que no necesita modificación */}
       <a href="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" target="_blank" rel="noopener noreferrer">
   <button className="cta-button">Solicitá tu tarjeta</button>
 </a>
 
     </div>
 
-      {/* Menú móvil */}
+      {/* Menú móvil (TERMINAR)*/}
       <div className="lg:hidden">
         <button onClick={() => setMobileMenuOpen(true)} className="text-gray-700" aria-label="Abrir menú móvil">
           <Bars3Icon className="h-6 w-6" />

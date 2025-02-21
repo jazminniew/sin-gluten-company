@@ -4,7 +4,7 @@
   background: white;
   padding: 10px;
   text-align: left;
-  cursor: pointer; /* Hace que el mouse cambie a "clickable" */
+  cursor: pointer; 
 }
 
 .card-image {

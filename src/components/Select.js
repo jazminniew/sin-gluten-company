@@ -21,7 +21,7 @@ const Select = ({ title, onFilterChange }) => {
     }
 
     setSelectedFilters(updatedFilters);
-    onFilterChange(updatedFilters); // Notifica el cambio a CardList
+    onFilterChange(updatedFilters);
   };
 
   return (

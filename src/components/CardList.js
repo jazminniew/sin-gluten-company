@@ -11,7 +11,8 @@ const products = [
   { image: "https://via.placeholder.com/300", title: "Producto 5", description: "Compra 2 y llévate 1 gratis", category: "Provincia" },
 ];
 
-const CardList = ({ filterTitle }) => { // Ahora recibe un título dinámico
+//los productos son filtrados desde select.js
+const CardList = ({ filterTitle }) => { 
   const [filters, setFilters] = useState([]);
 
   const filteredProducts = filters.length === 0 
@@ -20,7 +21,7 @@ const CardList = ({ filterTitle }) => { // Ahora recibe un título dinámico
 
   return (
     <div>
-      <Select title={filterTitle} onFilterChange={setFilters} /> {/* Pasamos el título */}
+      <Select title={filterTitle} onFilterChange={setFilters} /> 
       <div className="card-list">
         {filteredProducts.map((product, index) => (
           <Card key={index} image={product.image} title={product.title} description={product.description} />
