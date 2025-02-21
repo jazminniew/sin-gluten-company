@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Filter.css";
 
 const Filter = () => {
-  const [index, setIndex] = useState(null);
+  const navigate = useNavigate();
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const tabs = [
     { name: "Viandas/Comidas Congeladas", icon: "fast-food-outline" },
@@ -16,8 +18,17 @@ const Filter = () => {
     { name: "Hotelería", icon: "bed-outline" },
   ];
 
-  const handleClick = (i) => {
-    setIndex(index === i ? null : i);
+  const handleClick = (index, category) => {
+    if (activeIndex === index) {
+      // Si el botón ya está seleccionado, reseteamos y vamos a "/"
+      setActiveIndex(null);
+      navigate("/");
+    } else {
+      // Convertimos el nombre a una URL válida (sin espacios)
+      const formattedCategory = category.toLowerCase().replace(/\s+/g, "-");
+      setActiveIndex(index);
+      navigate(`/category/${formattedCategory}`);
+    }
   };
 
   return (
@@ -27,8 +38,8 @@ const Filter = () => {
         {tabs.slice(0, 4).map((tab, i) => (
           <button
             key={i}
-            className={`tab ${index === i ? "active" : ""}`}
-            onClick={() => handleClick(i)}
+            className={`tab ${activeIndex === i ? "active" : ""}`}
+            onClick={() => handleClick(i, tab.name)}
           >
             <ion-icon name={tab.icon}></ion-icon>
             <span>{tab.name}</span>
@@ -41,8 +52,8 @@ const Filter = () => {
         {tabs.slice(4, 8).map((tab, i) => (
           <button
             key={i + 4}
-            className={`tab ${index === i + 4 ? "active" : ""}`}
-            onClick={() => handleClick(i + 4)}
+            className={`tab ${activeIndex === i + 4 ? "active" : ""}`}
+            onClick={() => handleClick(i + 4, tab.name)}
           >
             <ion-icon name={tab.icon}></ion-icon>
             <span>{tab.name}</span>
@@ -54,11 +65,11 @@ const Filter = () => {
       <div className="tabs third-row">
         <button
           key={8}
-          className={`tab single-tab ${index === 8 ? "active" : ""}`}
-          onClick={() => handleClick(8)}
+          className={`tab single-tab ${activeIndex === 8 ? "active" : ""}`}
+          onClick={() => handleClick(8, tabs[8].name)}
         >
-          <ion-icon name={tabs[8].icon}></ion-icon> 
-          <span>{tabs[8].name}</span> 
+          <ion-icon name={tabs[8].icon}></ion-icon>
+          <span>{tabs[8].name}</span>
         </button>
       </div>
     </div>

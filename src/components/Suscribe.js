@@ -12,7 +12,13 @@ export default function Suscribe() {
       <div className="text-section">
         <h3>¡Suscribite Ahora!</h3>
         <h4>Adherite a la tarjeta de beneficios y empezá a ahorrar!!</h4>
-        <button className="subscribe-btn">Suscribirme</button>
+        <button 
+  className="subscribe-btn" 
+  onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/", "_blank")}
+>
+  Suscribirme
+</button>
+
       </div>
       <div className="flip-container" onClick={() => setFlipped(!flipped)}>
         <div className={`flipper ${flipped ? "flipped" : ""}`}>

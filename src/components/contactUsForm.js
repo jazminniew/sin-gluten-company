@@ -30,7 +30,7 @@ const ContactUsForm = () => {
     }
 
     if (id === "email") {
-      error = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Validación de email
+      error = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     }
 
     if (id === "message") {
@@ -41,7 +41,6 @@ const ContactUsForm = () => {
     setErrors({ ...errors, [id]: error });
   };
 
-  // Verificar si el formulario es válido
   const isFormValid =
     Object.values(errors).every((error) => !error) &&
     Object.values(form).every((field) => field.trim() !== "");
@@ -50,18 +49,18 @@ const ContactUsForm = () => {
     <div className="contact-container">
       <div className="contact-info">
         <h3>Información de Contacto</h3>
-        <div className="contact-item">
-        <ion-icon name="logo-whatsapp"></ion-icon>
+        <a href="https://wa.me/5491156565098" target="_blank" rel="noopener noreferrer" className="contact-item">
+          <ion-icon name="logo-whatsapp"></ion-icon>
           <span>+549115656-5098</span>
-        </div>
-        <div className="contact-item">
-        <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+        <a href="https://instagram.com/singlutencompany" target="_blank" rel="noopener noreferrer" className="contact-item">
+          <ion-icon name="logo-instagram"></ion-icon>
           <span>@singlutencompany</span>
-        </div>
-        <div className="contact-item">
-        <ion-icon name="mail-outline"></ion-icon>
-          <span>singlutencompany@gmail.com</span>
-        </div>
+        </a>
+        <a href="mailto:singlutencompany@gmail.com?subject=Contacto&body=Hola, quiero más información." className="contact-item">
+  <ion-icon name="mail-outline"></ion-icon>
+  <span>singlutencompany@gmail.com</span>
+</a>
       </div>
       <div className="contact-form">
         <h2>Contáctanos</h2>

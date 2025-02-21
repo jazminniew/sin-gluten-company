@@ -1,14 +1,21 @@
 import React from "react";
 import InfoSGC from "../components/infoSGC"; 
+import OurLocals from "../components/OurLocals"; 
 import Filter from "../components/Filter";
+import Suscribe from "../components/Suscribe";
 import "./About.css";
 
 const About = () => {
   return (
     <div>
-       <Filter />
-      <InfoSGC /> 
-         <img className="wsppbuisness" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjwcZ02OrBCoaWBVtN_fN1rgLmzg7_j6iaSQ6Cq5oL38RAnS7yibKlWoRk89bhhYfezfo&usqp=CAU" alt="" />
+      <Filter/>
+      <InfoSGC />
+      <h2 className="about-text">Algunos de nuestros locales</h2>
+      <div className="about-section">
+      <OurLocals/>
+      </div>
+      <Suscribe/>
+     
     </div>
   );
 };

@@ -20,10 +20,9 @@ const App = () => {
       
       <main>
         <Routes>
-        
           <Route path="/" element={<Home />} /> 
           <Route path="/faq" element={<Faq />} /> 
-          <Route path="/category" element={<Category />} /> 
+          <Route path="/category/:category" element={<Category />} /> 
           <Route path="/adherir" element={<AdhereTo />} />
           <Route path="/AdhereTo" element={<AdhereTo />} />
           <Route path="/contacto" element={<ContactUs />} /> 

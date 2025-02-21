@@ -1,0 +1,17 @@
+.our-locals {
+    padding: 20px 150px;
+  }
+  
+  .locals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  h2{
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
