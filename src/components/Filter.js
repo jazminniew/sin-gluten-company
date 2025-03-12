@@ -7,12 +7,12 @@ const Filter = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const tabs = [
-    { name: "Viandas/Comidas Congeladas", icon: "fast-food-outline" },
-    { name: "Restaurantes/Cafeterías", icon: "restaurant-outline" },
-    { name: "Panaderías/Pastelerías/Chocolaterías", icon: "cafe-outline" },
+    { name: "Viandas-Comidas Congeladas", icon: "fast-food-outline" },
+    { name: "Restaurantes-Cafeterías", icon: "restaurant-outline" },
+    { name: "Panaderías-Pastelerías-Chocolaterías", icon: "cafe-outline" },
     { name: "Envíos a todo el país", icon: "airplane-outline" },
-    { name: "Pizza/Empanadas/Pastas", icon: "pizza-outline" },
-    { name: "Almacenes/Dietéticas/Distribuidoras", icon: "storefront-outline" },
+    { name: "Pizza-Empanadas-Pastas", icon: "pizza-outline" },
+    { name: "Almacenes-Dietéticas-Distribuidoras", icon: "storefront-outline" },
     { name: "Heladerías", icon: "ice-cream-outline" },
     { name: "POR EL MUNDO", icon: "globe-outline" },
     { name: "Hotelería", icon: "bed-outline" },
