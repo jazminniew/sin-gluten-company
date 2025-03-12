@@ -1,0 +1,44 @@
+.logos-container {
+    width: 100%;
+    overflow: hidden;
+    background: #f8f8f8;
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    margin-bottom: 80px;
+    height: 100px; /* Altura mínima para probar */
+  }
+  
+  
+  /* Estilo para el contenedor interno de los logos */
+  .logos-slide {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    gap: 40px;
+    animation: scroll 35s linear infinite;
+    min-width: 100%; /* Asegura que el contenedor tenga al menos el tamaño del contenedor principal */
+  }
+  
+  
+  /* Estilo para las imágenes de los logos */
+  .logos-slide img {
+    height: 80px;
+    width: auto;
+  }
+  
+  /* Definición de la animación de desplazamiento */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .logos-container {
+  background-color: #ff0000;  /* Cambio de color de fondo para comprobar */
+}

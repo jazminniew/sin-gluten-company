@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./contactUsForm.css";
 import { TextField } from "@mui/material";
+import "./contactUsForm.css";
 
 const ContactUsForm = () => {
   const [form, setForm] = useState({
@@ -17,10 +17,8 @@ const ContactUsForm = () => {
     message: false,
   });
 
-  // Manejo de cambios en inputs
   const handleChange = (e) => {
     const { id, value } = e.target;
-
     let formattedValue = value;
     let error = false;
 
@@ -41,85 +39,34 @@ const ContactUsForm = () => {
     setErrors({ ...errors, [id]: error });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    const whatsappNumber = "+5491156565098"; 
+    const whatsappMessage = `Nuevo cliente interesado:
+    - Nombre: ${form.name} ${form.surname}
+    - Email: ${form.email}
+    - Mensaje: ${form.message}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+  };
+
   const isFormValid =
     Object.values(errors).every((error) => !error) &&
     Object.values(form).every((field) => field.trim() !== "");
 
   return (
     <div className="contact-container">
-      <div className="contact-info">
-        <h3>Información de Contacto</h3>
-        <a href="https://wa.me/5491156565098" target="_blank" rel="noopener noreferrer" className="contact-item">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <span>+549115656-5098</span>
-        </a>
-        <a href="https://instagram.com/singlutencompany" target="_blank" rel="noopener noreferrer" className="contact-item">
-          <ion-icon name="logo-instagram"></ion-icon>
-          <span>@singlutencompany</span>
-        </a>
-        <a href="mailto:singlutencompany@gmail.com?subject=Contacto&body=Hola, quiero más información." className="contact-item">
-  <ion-icon name="mail-outline"></ion-icon>
-  <span>singlutencompany@gmail.com</span>
-</a>
-      </div>
       <div className="contact-form">
         <h2>Contáctanos</h2>
-        <form>
-          <div className="input-group">
-            <TextField
-              className="form-input"
-              id="name"
-              label="Nombre"
-              variant="outlined"
-              fullWidth
-              value={form.name}
-              onChange={handleChange}
-              error={errors.name}
-              helperText={errors.name ? "El nombre no puede estar vacío" : ""}
-            />
-
-            <TextField
-              className="form-input"
-              id="surname"
-              label="Apellido"
-              variant="outlined"
-              fullWidth
-              value={form.surname}
-              onChange={handleChange}
-              error={errors.surname}
-              helperText={errors.surname ? "El apellido no puede estar vacío" : ""}
-            />
-          </div>
-
-          <TextField
-            className="form-input"
-            id="email"
-            label="Email"
-            variant="outlined"
-            fullWidth
-            value={form.email}
-            onChange={handleChange}
-            error={errors.email}
-            helperText={errors.email ? "Ingrese un email válido" : ""}
-          />
-
-          <TextField
-            className="form-input"
-            id="message"
-            label="Mensaje"
-            variant="outlined"
-            multiline
-            rows={4}
-            fullWidth
-            value={form.message}
-            onChange={handleChange}
-            error={errors.message}
-            helperText={errors.message ? "Debe tener entre 10 y 500 caracteres" : ""}
-          />
-
-          <button type="submit" className="form-button" disabled={!isFormValid}>
-            Enviar
-          </button>
+        <form onSubmit={handleSubmit}>
+          <TextField id="name" label="Nombre" fullWidth value={form.name} onChange={handleChange} error={errors.name} helperText={errors.name ? "El nombre no puede estar vacío" : ""} />
+          <TextField id="surname" label="Apellido" fullWidth value={form.surname} onChange={handleChange} error={errors.surname} helperText={errors.surname ? "El apellido no puede estar vacío" : ""} />
+          <TextField id="email" label="Email" fullWidth value={form.email} onChange={handleChange} error={errors.email} helperText={errors.email ? "Ingrese un email válido" : ""} />
+          <TextField id="message" label="Mensaje" fullWidth multiline rows={4} value={form.message} onChange={handleChange} error={errors.message} helperText={errors.message ? "Debe tener entre 10 y 500 caracteres" : ""} />
+          <button type="submit" className="form-button" disabled={!isFormValid}>Enviar</button>
         </form>
       </div>
     </div>

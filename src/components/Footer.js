@@ -19,7 +19,12 @@ export default function Footer() {
           <ul>
             <li><Link to="/about">¿Qué es SGC?</Link></li>
             <li><Link to="/faq">Preguntas Frecuentes (FAQ)</Link></li>
-            <li><Link to="/terminos">Términos y Condiciones</Link></li>
+            <li>
+  <a href="https://drive.google.com/file/d/1Be6aFQen7KhbPjB1eBBAYaBp37Pa8lFV/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
+    Términos y Condiciones
+  </a>
+</li>
+
             <li><Link to="/contacto">Contáctanos</Link></li>
           </ul>
         </div>

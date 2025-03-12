@@ -48,3 +48,8 @@ html, body {
     scrollbar-color: #b0b0b0 #e0e0e0;
   }
   
+
+  .wsppbuisness {
+    width: 60px; /* Ajusta el tamaño si es necesario */
+    transition: filter 0.3s ease-in-out;
+  }

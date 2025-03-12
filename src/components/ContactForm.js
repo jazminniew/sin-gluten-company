@@ -16,14 +16,11 @@ const ContactForm = () => {
     message: false,
   });
 
-  // Manejo de cambios en inputs
   const handleChange = (e) => {
     const { id, value } = e.target;
-
     let formattedValue = value;
     let error = false;
 
-    // Validaciones
     if (id === "name") {
       formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
       error = formattedValue.trim() === "";
@@ -41,67 +38,33 @@ const ContactForm = () => {
     setErrors({ ...errors, [id]: error });
   };
 
-  // Verificar si el formulario es válido
-  const isFormValid = Object.values(errors).every((error) => !error) && 
-                      Object.values(form).every((field) => field.trim() !== "");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    const whatsappNumber = "+5491164386972"; 
+    const whatsappMessage = `Nuevo proveedor interesado:
+    - Nombre del Local: ${form.name}
+    - WhatsApp: ${form.whatsapp}
+    - Instagram: ${form.instagram || "No especificado"}
+    - Mensaje: ${form.message}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
+  };
+
+  const isFormValid =
+    Object.values(errors).every((error) => !error) &&
+    Object.values(form).every((field) => field.trim() !== "");
 
   return (
     <div className="form-container">
-      <form className="form">
-        <TextField
-          className="form-input"
-          id="name"
-          label="Nombre del Local"
-          variant="outlined"
-          fullWidth
-          value={form.name}
-          onChange={handleChange}
-          error={errors.name}
-          helperText={errors.name ? "El nombre no puede estar vacío" : ""}
-        />
-
-        <TextField
-          className="form-input"
-          id="whatsapp"
-          label="WhatsApp"
-          variant="outlined"
-          fullWidth
-          value={form.whatsapp}
-          onChange={handleChange}
-          error={errors.whatsapp}
-          helperText={errors.whatsapp ? "Debe ser un número entre 10 y 15 dígitos" : ""}
-        />
-
-        <TextField
-          className="form-input"
-          id="instagram"
-          label="Instagram"
-          variant="outlined"
-          fullWidth
-          value={form.instagram}
-          onChange={handleChange}
-        />
-
-        <TextField
-          className="form-input"
-          id="message"
-          label="Mensaje"
-          variant="outlined"
-          multiline
-          rows={4}
-          fullWidth
-          value={form.message}
-          onChange={handleChange}
-          error={errors.message}
-          helperText={errors.message ? "Debe tener entre 10 y 500 caracteres" : ""}
-        />
-
-        <button
-          className="form-button"
-          disabled={!isFormValid}
-        >
-          Enviar
-        </button>
+      <form className="form" onSubmit={handleSubmit}>
+        <TextField id="name" label="Nombre del Local" fullWidth value={form.name} onChange={handleChange} error={errors.name} helperText={errors.name ? "El nombre no puede estar vacío" : ""} />
+        <TextField id="whatsapp" label="WhatsApp" fullWidth value={form.whatsapp} onChange={handleChange} error={errors.whatsapp} helperText={errors.whatsapp ? "Debe ser un número entre 10 y 15 dígitos" : ""} />
+        <TextField id="instagram" label="Instagram" fullWidth value={form.instagram} onChange={handleChange} />
+        <TextField id="message" label="Mensaje" fullWidth multiline rows={4} value={form.message} onChange={handleChange} error={errors.message} helperText={errors.message ? "Debe tener entre 10 y 500 caracteres" : ""} />
+        <button type="submit" className="form-button" disabled={!isFormValid}>Enviar</button>
       </form>
     </div>
   );

@@ -94,8 +94,9 @@ const Home = () => {
   title="Cerca mío" 
   icon="location-outline" 
   buttonText="Ver más" 
-  link="/map"
+  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"
 />
+
 
   <Card 
   title="Suscribite" 
