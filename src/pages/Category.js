@@ -5,12 +5,12 @@ import CardList from "../components/CardList";
 import Suscribe from "../components/Suscribe";
 
 export default function Category() {
-  const { category } = useParams(); 
+  const { category } = useParams();
 
   return (
     <div>
       <Filter />
-      <CardList filterTitle={category} />
+      <CardList category={category} />
       <Suscribe />
     </div>
   );
