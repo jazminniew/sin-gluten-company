@@ -20,7 +20,7 @@ const Card = ({ title,icon, description, buttonText, link }) => {
 
 const StyledWrapper = styled.div`
   .card {
-    width: 400px;
+    width: 360px;
     height: 254px;
     border-radius: 20px;
     background: #f5f5f5;
