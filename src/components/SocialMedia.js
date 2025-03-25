@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 250px;
-background-color: rgba(0, 87, 93, 0.65); /* 50% de transparencia */
+background-color: rgba(237, 237, 237, 0.36); /* 50% de transparencia */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,8 +92,16 @@ background-color: rgba(0, 87, 93, 0.65); /* 50% de transparencia */
     width: 27px; /* Ancho específico solo para el icono de TikTok */
   }
   .socialSvg path {
-    fill: rgb(255, 255, 255);
+    fill: rgb(134, 134, 134);
   }
+
+.socialContainer:hover .socialSvg path {
+  fill: #ffffff !important;
+}
+
+
+
+
 
   .socialContainer:hover .socialSvg {
     animation: slide-in-top 0.3s both;

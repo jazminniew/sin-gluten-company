@@ -66,18 +66,19 @@
     display: flex;
     justify-content: center;
     margin: 60px 0 0px 0px;
+
   }
   
   .search-box {
     display: flex;
     align-items: center;
     background: #f7f8fa;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 2px;
     box-shadow: 0 4px 8px rgba(93, 93, 93, 0.1);
     gap: 10px;
     width: 600px;  /* 🔹 Ancho fijo del buscador */
-    height: 60px;
+    height: 65px;
   }
   
   /* Input de búsqueda */
@@ -89,6 +90,7 @@
     padding: 10px 15px;
     border-right: 1px solid #ddd;
     flex: 1;
+
   }
   
   .search-input input {
@@ -98,6 +100,7 @@
     font-size: 1rem;
     color: #555;
     width: 100%;
+    
   }
   
   /* Selector de ubicación */
@@ -116,7 +119,7 @@
   /* Dropdown */
   .dropdown {
     position: absolute;
-    top: 40px;
+    top: 0px;
     left: 0;
     background: white;
     border-radius: 8px;
@@ -143,11 +146,13 @@
     background: #00a8b5;
     color: white;
     border: none;
-    padding: 16px 50px;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    margin: 3px;
+    padding: 16px 36px;
+    border-radius: 15px;
+    font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s;
+    font-weight: 600;
   }
   
   .search-button:hover {
@@ -377,7 +382,6 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  margin-top: 10px;
   background-color: transparent;
   border-radius: 5px;
 }
