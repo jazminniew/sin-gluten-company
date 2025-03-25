@@ -21,14 +21,14 @@ const Button = () => {
 
 const StyledWrapper = styled.div`
   .cssbuttons-io-button {
-    background: #a370f0;
+    background: #00a8b5;
     color: white;
     font-family: inherit;
     padding: 0.35em;
-    padding-left: 1.2em;
-    font-size: 17px;
+    padding-left: 1.4em;
+    font-size: 14px;
     font-weight: 500;
-    border-radius: 0.9em;
+    border-radius: 2em;
     border: none;
     letter-spacing: 0.05em;
     display: flex;
@@ -36,7 +36,7 @@ const StyledWrapper = styled.div`
     box-shadow: inset 0 0 1.6em -0.6em #714da6;
     overflow: hidden;
     position: relative;
-    height: 2.8em;
+    height: 3.1em;
     padding-right: 3.3em;
     cursor: pointer;
   }
@@ -50,8 +50,8 @@ const StyledWrapper = styled.div`
     justify-content: center;
     height: 2.2em;
     width: 2.2em;
-    border-radius: 0.7em;
-    box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+    border-radius: 1.8em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #005b62 ;
     right: 0.3em;
     transition: all 0.3s;
   }
