@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from "../Images/logo.png"; 
 import BtnSolicita from './BtnSolicita';  // Importa el nuevo botón
+import SocialMedia from './SocialMedia'; // Importa el componente
+
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,7 +21,7 @@ export default function Header() {
         <span className="company-name">SIN GLUTEN <span>COMPANY</span></span>
       </div>
 
-      {/* Redes sociales */}
+      {/* Redes sociales
       <div className="social-icons hidden lg:flex items-center gap-4">
         <a href="https://www.tiktok.com/@sin.gluten.compan?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
           <ion-icon name="logo-tiktok"></ion-icon>
@@ -31,6 +33,12 @@ export default function Header() {
           <ion-icon name="logo-facebook"></ion-icon>
         </a>
       </div>
+       */}
+
+<div className="hidden lg:flex items-center gap-4">
+  <SocialMedia />
+</div>
+
 
       {/* Botones */}
       <div className="container-button">
