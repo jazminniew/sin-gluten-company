@@ -66,8 +66,12 @@ const Home = () => {
   };
 
   
-  // Función de búsqueda (ahora solo se ejecuta cuando el usuario hace clic en el botón de búsqueda)
   const handleSearch = () => {
+    if (search.trim() === "") {
+      // Si el campo de búsqueda está vacío, no se ejecuta la búsqueda
+      return;
+    }
+    
     console.log("Buscando:", search, "Provincia:", location); // Verifica los valores antes de filtrar
   
     let results = data.filter((item) => {

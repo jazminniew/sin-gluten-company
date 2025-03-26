@@ -25,7 +25,7 @@ const CardList = () => {
 
   });
   console.log("📌 Data completa antes de filtrar:", data);
-  console.log("📌 Categoría a filtrar:", category.replace("-", " ").trim().toLowerCase());
+  console.log("📌 Categoría a filtrar:", category.replace("-", "").trim().toLowerCase());
   
   
   useEffect(() => {
@@ -87,7 +87,14 @@ const filtered = data.filter(item =>
 
   return (
     <div className="container">
-      <h2>Descuentos en "{category ? category.replace("-", " ") : "Todas las categorías"}"</h2>
+<h2>
+  Descuentos en{" "}
+  {category
+    ? category.replace("-", " ").charAt(0).toUpperCase() + category.slice(1).replace("-", " ")
+    : "Todas las categorías"}
+</h2>
+
+
 
       <div className="filtrosLocales">
         <Autocomplete

@@ -6,8 +6,8 @@ import "./AdhereTo.css";
 const AdhereTo = () => {
   return (
     <div>
-      <Filter />
       <h1 className="AdhereToTitle">¿Querés sumar tu comercio a Sin Gluten Company?</h1>
+      <div className="title-underline-adhere"></div>
       <ContactForm /> 
       <h2 className="AdhereToh2">
         Si tenés un local o sos elaborador sin gluten, sumate a nuestra propuesta

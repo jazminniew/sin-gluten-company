@@ -34,7 +34,7 @@ export default function Footer() {
       <hr />
 
       <p className="footer-rights">
-        © 2024 Sin Gluten Company. Todos los derechos reservados.
+        © 2025 Sin Gluten Company. Todos los derechos reservados.
       </p>
     </footer>
   );

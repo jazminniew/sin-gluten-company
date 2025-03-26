@@ -1,8 +1,3 @@
-.AdhereToTitle{
-    font-size: 1.3em;
-    font-weight: 600;
-    margin: 80px 0 40px 120px;
-}
 
 .AdhereToh2{
     font-size: 1.3em;
@@ -52,4 +47,26 @@ html, body {
   .wsppbuisness {
     width: 60px; /* Ajusta el tamaño si es necesario */
     transition: filter 0.3s ease-in-out;
+  }
+
+  .AdhereToTitle{
+    font-size: 2.25rem ;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #00aaba, #053b47);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  
+  .title-underline-adhere {
+    height: 4px;
+    width: 260px;
+    background: linear-gradient(to right, #00aaba, #053b47);
+    margin: 0 auto;
+    border-radius: 9999px;
   }

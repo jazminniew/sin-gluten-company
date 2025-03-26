@@ -72,7 +72,7 @@
   .search-box {
     display: flex;
     align-items: center;
-    background: #f7f8fa;
+    background: #0D4F66; /*00a8b5*/
     border-radius: 20px;
     padding: 2px;
     box-shadow: 0 4px 8px rgba(93, 93, 93, 0.1);
@@ -143,8 +143,8 @@
   
   /* Botón de búsqueda */
   .search-button {
-    background: #00a8b5;
-    color: white;
+    background: #f2f2f2;
+    color: #0D4F66;
     border: none;
     margin: 3px;
     padding: 16px 36px;
@@ -156,7 +156,7 @@
   }
   
   .search-button:hover {
-    background: #008a94;
+    background: #ffffff;
   }
 
 
@@ -384,6 +384,7 @@ html, body {
   padding: 10px;
   background-color: transparent;
   border-radius: 5px;
+  color: white;
 }
 
 .search-location span {
@@ -420,5 +421,5 @@ html, body {
 }
 
 .search-input input {
-  color: black;  /* Asegúrate de que el texto sea negro o visible */
+  color: white;  /* Asegúrate de que el texto sea negro o visible */
 }

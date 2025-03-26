@@ -9,14 +9,14 @@ const ContactUsForm = () => {
     email: "",
     message: "",
   });
-
+  
   const [errors, setErrors] = useState({
     name: false,
     surname: false,
     email: false,
     message: false,
   });
-
+  
   const handleChange = (e) => {
     const { id, value } = e.target;
     let formattedValue = value;
@@ -43,6 +43,7 @@ const ContactUsForm = () => {
     e.preventDefault();
     if (!isFormValid) return;
 
+  
     const whatsappNumber = "+5491156565098"; 
     const whatsappMessage = `Nuevo cliente interesado:
     - Nombre: ${form.name} ${form.surname}
@@ -56,12 +57,13 @@ const ContactUsForm = () => {
   const isFormValid =
     Object.values(errors).every((error) => !error) &&
     Object.values(form).every((field) => field.trim() !== "");
-
-  return (
-    <div className="contact-container">
-      <div className="contact-form">
-        <h2>Contáctanos</h2>
-        <form onSubmit={handleSubmit}>
+  
+    return (
+      <div className="all">
+        <h2 className="title">Contáctanos</h2>
+        <div className="title-underline-contactUs"></div>
+      <div className="form-container">
+      <form className="form" onSubmit={handleSubmit}>
           <TextField id="name" label="Nombre" fullWidth value={form.name} onChange={handleChange} error={errors.name} helperText={errors.name ? "El nombre no puede estar vacío" : ""} />
           <TextField id="surname" label="Apellido" fullWidth value={form.surname} onChange={handleChange} error={errors.surname} helperText={errors.surname ? "El apellido no puede estar vacío" : ""} />
           <TextField id="email" label="Email" fullWidth value={form.email} onChange={handleChange} error={errors.email} helperText={errors.email ? "Ingrese un email válido" : ""} />
@@ -70,7 +72,7 @@ const ContactUsForm = () => {
         </form>
       </div>
     </div>
-  );
+    );
 };
 
 export default ContactUsForm;

@@ -5,10 +5,9 @@ import Filter from "../components/Filter";
 const ContactUs = () => {
   return (
     <div>
-       <Filter />
        <ContactUsForm />  
     </div>
-  );
+  );  
 };
 
 export default ContactUs;

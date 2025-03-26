@@ -8,7 +8,6 @@ import "./About.css";
 const About = () => {
   return (
     <div>
-      <Filter/>
       <InfoSGC />
       <h2 className="about-text">Algunos de nuestros locales</h2>
       <div className="about-section">

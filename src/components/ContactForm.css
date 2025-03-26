@@ -1,9 +1,9 @@
 .form-container {
-  background-color: #F4F4F4;
+  background-color: #f4f4f47a;
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 30px;
   max-width: 1000px;
-  margin: auto;
+  margin: 60px auto;
 }
 
 .form {
