@@ -7,7 +7,7 @@ const Button = () => {
   return (
     <StyledWrapper>
       <button className="cssbuttons-io-button">
-        Get started
+      Solicitá tu tarjeta
         <div className="icon">
           <svg height={24} width={24} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none" />
@@ -24,8 +24,8 @@ const StyledWrapper = styled.div`
     background: #00a8b5;
     color: white;
     font-family: inherit;
-    padding: 0.35em;
-    padding-left: 1.4em;
+    padding: 0.2em;
+    padding-left: 0.8em;
     font-size: 14px;
     font-weight: 500;
     border-radius: 2em;

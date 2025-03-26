@@ -9,7 +9,23 @@ import SocialMedia from './SocialMedia'; // Importa el componente
 
 
 export default function Header() {
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: 'Adherí tu Comercio', route: '/adherir-comercio' },
+    { label: 'Viandas/Comidas Congeladas', route: '/viandas' },
+    { label: 'Restaurantes/Cafeterías', route: '/restaurantes' },
+    { label: 'Panaderías/Pastelerías/Chocolaterías', route: '/panaderias' },
+    { label: 'Envíos a todo el país', route: '/envios' },
+    { label: 'Pizza/Empanadas/Pastas', route: '/pizzas' },
+    { label: 'Almacenes/Dietéticas/Distribuidoras', route: '/almacenes' },
+    { label: 'Heladerías', route: '/heladerias' },
+    { label: 'POR EL MUNDO', route: '/mundo' },
+    { label: 'Hotelería', route: '/hoteleria' }
+  ];
+
+  
 
   return (
     <header>
@@ -59,32 +75,75 @@ export default function Header() {
         </button>
       </div>
 
-      <Dialog open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)} className="lg:hidden">
-        <DialogPanel className="fixed inset-0 bg-white p-6 z-50">
-          <div className="flex justify-between items-center">
+      
+      <Dialog 
+        open={mobileMenuOpen} 
+        onClose={() => setMobileMenuOpen(false)} 
+        onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)} 
+        className="lg:hidden"
+      >
+        <DialogPanel className="fixed inset-0 bg-white p-6 z-50 overflow-y-auto rounded-3xl">
+          <div className="flex justify-between items-center mb-8">
             <Link to="/" className="logo">
-              <img src={logo} alt="Sin Gluten Company" style={{ width: "60px" }} />
+              <img 
+                src={logo} 
+                alt="Sin Gluten Company" 
+                style={{ 
+                  width: "60px", 
+                  borderRadius: "12px", 
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)" 
+                }} 
+              />
             </Link>
-            <button onClick={() => setMobileMenuOpen(false)} className="text-gray-700" aria-label="Cerrar menú móvil">
+            <button 
+              onClick={() => setMobileMenuOpen(false)} 
+              className="text-gray-700 hover:bg-gray-100 p-2 rounded-full transition" 
+              aria-label="Cerrar menú móvil"
+            >
               <XMarkIcon className="h-6 w-6" />
             </button>
           </div>
 
-          <div className="mt-6 space-y-4 text-center">
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Adherí tu Comercio</a>
-            <BtnSolicita /> {/* Botón en el menú móvil también */}
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Viandas/Comidas Congeladas</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Restaurantes/Cafeterías</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Panaderías/Pastelerías/Chocolaterías</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Envíos a todo el país</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Pizza/Empanadas/Pastas</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Almacenes/Dietéticas/Distribuidoras</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Heladerías</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">POR EL MUNDO</a>
-            <a href="#" className="text-gray-500 text-lg hover:text-gray-700">Hotelería</a>
+          <div className="space-y-4">
+            {/* Sección de Acciones */}
+            <div className="bg-gray-50 rounded-xl p-4 mb-6 shadow-sm">
+              <div className="space-y-3">
+                <Link 
+                  to="/adherir-comercio"
+                  className="block bg-white border border-gray-200 text-gray-800 text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition text-center"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Adherí tu Comercio
+                </Link>
+                <Link 
+                  to="/solicitar-tarjeta"
+                  className="block text-blue-600 text-base text-center font-semibold hover:text-blue-800 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Solicitar Tarjeta
+                </Link>
+              </div>
+            </div>
+
+            {/* Sección de Categorías */}
+            <div className="space-y-3">
+              <h2 className="text-lg font-semibold text-gray-700 px-4">Categorías</h2>
+              {menuItems.slice(1).map((item, index) => (
+                <Link 
+                  key={index}
+                  to={item.route}
+                  className="block text-gray-600 text-base py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </DialogPanel>
       </Dialog>
+
+
     </header>
   );
 }

@@ -423,3 +423,147 @@ html, body {
 .search-input input {
   color: white;  /* Asegúrate de que el texto sea negro o visible */
 }
+
+/* Media Queries */
+
+/* Para tablets */
+@media (max-width: 1024px) {
+  .info-cards {
+      grid-template-columns: repeat(2, 1fr); /* Dos tarjetas en la fila superior */
+  }
+
+  .info-cards .card:nth-child(3) {
+      grid-column: span 2; /* La tercera tarjeta se va a la fila inferior */
+  }
+
+  .image-wrapper {
+      height: 200px; /* Ajusta la altura de la imagen en pantallas más pequeñas */
+  }
+
+  .search-box {
+      width: 80%; /* Hacer el buscador más pequeño */
+  }
+
+  .filters-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+  }
+
+  .search-location {
+      display: block; /* Mostrar el selector de ubicación */
+  }
+}
+
+/* Para dispositivos móviles */
+@media (max-width: 768px) {
+  .info-cards {
+      grid-template-columns: 1fr; /* Una tarjeta por fila */
+  }
+
+  .image-wrapper {
+      height: 200px;
+  }
+
+  .search-box {
+      width: 90%;
+  }
+
+  .filters-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+  }
+
+  .search-location {
+      display: block;
+  }
+}
+
+/* Para pantallas más pequeñas (como teléfonos pequeños) */
+@media (max-width: 480px) {
+  .info-cards {
+      grid-template-columns: 1fr;
+  }
+
+  .image-wrapper {
+      height: 150px;
+  }
+
+  .search-box {
+      width: 100%;
+  }
+
+  .swiper-slide {
+      width: 100%;
+  }
+
+  .blue-section {
+      padding: 40px 0;
+  }
+
+  .search-input input {
+      font-size: 14px;
+  }
+}
+
+.grid-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.link-item {
+  display: block;
+  text-decoration: none;
+  color: #555;
+  font-size: 1rem;
+  padding: 12px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.link-item:hover {
+  background: #e2e2e2;
+  transform: scale(1.05);
+}
+
+/* Estilos para los anuncios */
+.ads-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.ad-card {
+  width: 300px;
+  height: 200px;
+  background: #f2f2f2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.ad-card:hover {
+  transform: scale(1.05);
+}
+
+/* Ajustes para los anuncios en dispositivos pequeños */
+@media (max-width: 768px) {
+  .ad-card {
+      width: 100%;
+      height: auto;
+  }
+}
