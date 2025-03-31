@@ -14,16 +14,17 @@ export default function Header() {
 
   const menuItems = [
     { label: 'Adherí tu Comercio', route: '/adherir-comercio' },
-    { label: 'Viandas/Comidas Congeladas', route: '/viandas' },
-    { label: 'Restaurantes/Cafeterías', route: '/restaurantes' },
-    { label: 'Panaderías/Pastelerías/Chocolaterías', route: '/panaderias' },
-    { label: 'Envíos a todo el país', route: '/envios' },
-    { label: 'Pizza/Empanadas/Pastas', route: '/pizzas' },
-    { label: 'Almacenes/Dietéticas/Distribuidoras', route: '/almacenes' },
-    { label: 'Heladerías', route: '/heladerias' },
-    { label: 'POR EL MUNDO', route: '/mundo' },
-    { label: 'Hotelería', route: '/hoteleria' }
+    { label: 'Viandas/Comidas Congeladas', route: '/category/viandas-comidas-congeladas' },
+    { label: 'Restaurantes/Cafeterías', route: '/category/restaurantes-cafeterias' },
+    { label: 'Panaderías/Pastelerías/Chocolaterías', route: '/category/panaderias-pastelerias-chocolaterias' },
+    { label: 'Envíos a todo el país', route: '/category/envios-a-todo-el-pais' },
+    { label: 'Pizza/Empanadas/Pastas', route: '/category/pizza-empanadas-pastas' },
+    { label: 'Almacenes/Dietéticas/Distribuidoras', route: '/category/almacenes-dieteticas-distribuidoras' },
+    { label: 'Heladerías', route: '/category/heladerias' },
+    { label: 'POR EL MUNDO', route: '/category/por-el-mundo' },
+    { label: 'Hotelería', route: '/category/hoteleria' }
   ];
+  
 
   
 
@@ -109,14 +110,14 @@ export default function Header() {
             <div className="bg-gray-50 rounded-xl p-4 mb-6 shadow-sm">
               <div className="space-y-3">
                 <Link 
-                  to="/adherir-comercio"
+                  to="/adherir"
                   className="block bg-white border border-gray-200 text-gray-800 text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition text-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Adherí tu Comercio
                 </Link>
                 <Link 
-                  to="/solicitar-tarjeta"
+                  to="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
                   className="block text-blue-600 text-base text-center font-semibold hover:text-blue-800 transition"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -147,3 +148,6 @@ export default function Header() {
     </header>
   );
 }
+
+
+

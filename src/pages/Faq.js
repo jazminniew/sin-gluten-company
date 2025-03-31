@@ -8,7 +8,6 @@ import Preguntas from "../components/preguntas-frecuentes"
 const Faq = () => {
   return (
     <div>
-         <Filter/>
     <Preguntas/>
       <Suscribe/>
     </div>

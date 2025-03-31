@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // ✅ Importa useEffect aquí
+import React, { useState, useEffect } from "react"; 
 import "./Home.css";
 import Filter from "../components/Filter";
 import Suscribe from "../components/Suscribe";
@@ -11,20 +11,16 @@ import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
 
-
-
 const Home = () => {
-  const [data, setData] = useState([]); // Datos del Excel
+  const [data, setData] = useState([]); 
   const [search, setSearch] = useState(""); 
   const [location, setLocation] = useState("Provincia (Opcional)"); 
   const [showDropdown, setShowDropdown] = useState(false);
-  const [locations, setLocations] = useState([]); // Provincias únicas
-  const [filteredResults, setFilteredResults] = useState([]); // Resultados filtrados
-  const [suggestions, setSuggestions] = useState([]); // Sugerencias para autocompletado
+  const [locations, setLocations] = useState([]); 
+  const [filteredResults, setFilteredResults] = useState([]); 
+  const [suggestions, setSuggestions] = useState([]); 
   const [hasSearched, setHasSearched] = useState(false);
 
-
-  // Cargar datos desde el archivo XLSX
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/SGCDB.xlsx");
@@ -36,13 +32,12 @@ const Home = () => {
     
       setData(parsedData);
     
-      // Filtrar provincias únicas
       const uniqueProvinces = [...new Set(parsedData.map((item) => item.Provincia))];
       setLocations(uniqueProvinces);
     };
     
     fetchData();
-  }, []); // Esto solo carga los datos cuando el componente se monta
+  }, []); 
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -51,10 +46,8 @@ const Home = () => {
       }
     };
   
-    // Escuchar clics fuera
     document.addEventListener('click', handleClickOutside);
   
-    // Limpiar el event listener al desmontar el componente
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
@@ -62,48 +55,37 @@ const Home = () => {
   
   const handleLocationSelect = (loc) => {
     setLocation(loc);
-    setShowDropdown(false); // Cierra el dropdown
+    setShowDropdown(false); 
   };
 
   
   const handleSearch = () => {
     if (search.trim() === "") {
-      // Si el campo de búsqueda está vacío, no se ejecuta la búsqueda
       return;
     }
-    
-    console.log("Buscando:", search, "Provincia:", location); // Verifica los valores antes de filtrar
-  
+      
     let results = data.filter((item) => {
-      // Filtrar por nombre de local
       return item["Nombre Local"] && item["Nombre Local"].toLowerCase().includes(search.toLowerCase());
     });
   
     if (location && location !== "Provincia (Opcional)") {
-      // Filtrar por provincia
       results = results.filter((item) => item.Provincia && item.Provincia === location);
     }
-  
-    console.log("Resultados después de filtro:", results); // Verifica los resultados filtrados
-  
-    setFilteredResults(results); // Actualiza los resultados
-    setHasSearched(true); // Marca que se ha realizado una búsqueda
+    
+    setFilteredResults(results); 
+    setHasSearched(true);
   };
   
-
-  // Función para manejar presionar tecla Enter
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
 
-  // Función para manejar el cambio en el campo de búsqueda (sugerencias)
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
   
-    // Filtrar sugerencias a medida que el usuario escribe
     if (value.length > 0) {
       const filteredSuggestions = data.filter((item) =>
         item["Nombre Local"] && item["Nombre Local"].toLowerCase().startsWith(value.toLowerCase())
@@ -114,23 +96,19 @@ const Home = () => {
     }
   };
   
-
-  // Función para manejar el clic en una sugerencia
   const handleSuggestionClick = (suggestion) => {
     setSearch(suggestion["Nombre Local"]);
-    setSuggestions([]); // Oculta las sugerencias al seleccionar una
+    setSuggestions([]); 
   };
 
   return (
     <div className="home-container">
       <div className="image-wrapper"></div>
       
-      {/* Filtros */}
       <div className="filters-container">
         <Filter />
       </div>
 
-      {/* Barra de búsqueda */}
       <div className="search-container">
         <div className="search-box">
           <div className="search-input" onClick={() => setShowDropdown(false)}>
@@ -141,18 +119,17 @@ const Home = () => {
               type="text"
               placeholder="¿Qué buscas?"
               value={search}
-              onChange={handleSearchChange} // Actualiza el estado de búsqueda
-              onKeyDown={handleKeyDown} // Detecta la tecla Enter
+              onChange={handleSearchChange} 
+              onKeyDown={handleKeyDown} 
             />
 
-            {/* Mostrar sugerencias si existen */}
             {suggestions.length > 0 && (
               <div className="suggestions-dropdown">
                 {suggestions.map((item, index) => (
                   <div 
                     key={index} 
                     className="suggestions-item"
-                    onClick={() => handleSuggestionClick(item)} // Hace clic en una sugerencia
+                    onClick={() => handleSuggestionClick(item)} 
                   >
                     {item["Nombre Local"]}
                   </div>
@@ -161,7 +138,6 @@ const Home = () => {
             )}
           </div>
 
-          {/* Selector de provincia */}
           <div className="search-location" onClick={() => setShowDropdown(!showDropdown)}>
             <span>{location}</span>
             <span role="img" aria-label="arrow">▼</span>
@@ -184,7 +160,6 @@ const Home = () => {
         </div>
       </div>
 
-   {/* Resultados filtrados */}
 <div className="results-container">
   {filteredResults.length === 0 && hasSearched ? (
     <p>No se encontraron resultados.</p>
@@ -202,17 +177,13 @@ const Home = () => {
   )}
 </div>
 
-
-
-
-
       <div className="blue-section">
       <Swiper
   effect="coverflow"
   grabCursor={false}
   centeredSlides={true}
   slidesPerView="auto"
-  loop={filteredResults.length > 5}  // Desactivar loop si hay pocos slides
+  loop={filteredResults.length > 5} 
   autoplay={{ delay: 5500, disableOnInteraction: false }} 
   coverflowEffect={{
     rotate: 0,
@@ -224,7 +195,6 @@ const Home = () => {
   modules={[EffectCoverflow, Autoplay]}
   className="mySwiper"
 >
-
 
   <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 1" /></SwiperSlide>
   <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 2" /></SwiperSlide>
@@ -239,31 +209,25 @@ const Home = () => {
   <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
 
 </Swiper>
-
       </div>
       <div className="info-cards">
       <Card 
   title="Cerca mío" 
   icon="location-outline" 
   buttonText="Ver más" 
-  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"
-/>
-
+  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"/>
 
   <Card 
   title="Suscribite" 
   icon="mail-outline" 
   buttonText="Ver más" 
-  link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
-/>
+  link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"/>
 <Card 
   title="Adherí tu comercio" 
   icon="storefront-outline" 
   buttonText="Ver más" 
-  link="/adherir"
-/>
+  link="/adherir"/>
 
-  {/*<Card title="Shop" icon="cart-outline" buttonText="Ver más" />*/}
 </div>
       <div className="logos-container">
   <div className="logos-slide">
@@ -294,11 +258,7 @@ const Home = () => {
 </div>
 
 <Suscribe />
-
-
     </div>
-
-    
   );
 };
 

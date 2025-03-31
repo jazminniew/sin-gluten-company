@@ -420,6 +420,12 @@ html, body {
   cursor: pointer;
 }
 
+.promo-img {
+  width: 100%; 
+  max-width: 300px; /* Tamaño normal */
+  height: auto;
+}
+
 .search-input input {
   color: white;  /* Asegúrate de que el texto sea negro o visible */
 }
@@ -452,15 +458,26 @@ html, body {
   }
 
   .search-location {
-      display: block; /* Mostrar el selector de ubicación */
+    display: none; /* Oculta el selector de provincia */
   }
+  .search-input {
+    border-right: none; /* Elimina la línea divisoria */
+  }
+  .search-box {
+    width: 100%;
+}
 }
 
 /* Para dispositivos móviles */
 @media (max-width: 768px) {
+  
   .info-cards {
       grid-template-columns: 1fr; /* Una tarjeta por fila */
   }
+  .promo-img {
+    max-width: 200px; /* Más chico en pantallas pequeñas */
+  }
+  
 
   .image-wrapper {
       height: 200px;
@@ -479,11 +496,24 @@ html, body {
 
   .search-location {
       display: block;
+      
+  }
+  .search-location {
+    display: none; /* Oculta el selector de provincia */
+  }
+  .search-input {
+    border-right: none; /* Elimina la línea divisoria */
   }
 }
 
 /* Para pantallas más pequeñas (como teléfonos pequeños) */
 @media (max-width: 480px) {
+  .search-location {
+    display: none; /* Oculta el selector de provincia */
+  }
+  .search-input {
+    border-right: none; /* Elimina la línea divisoria */
+  }
   .info-cards {
       grid-template-columns: 1fr;
   }
@@ -565,5 +595,12 @@ html, body {
   .ad-card {
       width: 100%;
       height: auto;
+      
+  }
+  .search-location {
+    display: none; /* Oculta el selector de provincia */
+  }
+  .search-input {
+    border-right: none; /* Elimina la línea divisoria */
   }
 }
