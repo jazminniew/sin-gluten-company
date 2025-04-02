@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Filter.css";
 
 const Filter = () => {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation();
+
+  // Estado para el filtro activo
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const savedIndex = localStorage.getItem("activeFilter");
+    return savedIndex !== null ? parseInt(savedIndex) : null;
+  });
 
   const tabs = [
     { name: "Viandas-Comidas Congeladas", iconSrc: "/ionicons/fast-food-outline.svg" },
@@ -18,14 +24,36 @@ const Filter = () => {
     { name: "Hotelería", iconSrc: "/ionicons/bed-outline.svg" },
   ];
 
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    // 🔹 Si estamos en Home, reseteamos el filtro
+    if (currentPath === "/") {
+      setActiveIndex(null);
+      localStorage.removeItem("activeFilter");
+    } else {
+      // 🔹 Si estamos en una categoría, activamos el filtro correcto
+      const matchedIndex = tabs.findIndex(
+        (tab) => `/category/${tab.name.toLowerCase().replace(/\s+/g, "-")}` === currentPath
+      );
+
+      if (matchedIndex !== -1) {
+        setActiveIndex(matchedIndex);
+      }
+    }
+  }, [location.pathname]); // Se ejecuta cuando cambia la URL
+
   const handleClick = (index, category) => {
     if (activeIndex === index) {
+      // Si ya está activo, lo desactivamos y volvemos a Home
       setActiveIndex(null);
-      navigate("/");
+      localStorage.removeItem("activeFilter");
+      setTimeout(() => navigate("/"), 50);
     } else {
-      const formattedCategory = category.toLowerCase().replace(/\s+/g, "-");
+      // Activamos el filtro y navegamos a la categoría
       setActiveIndex(index);
-      navigate(`/category/${formattedCategory}`);
+      localStorage.setItem("activeFilter", index);
+      setTimeout(() => navigate(`/category/${category.toLowerCase().replace(/\s+/g, "-")}`), 50);
     }
   };
 

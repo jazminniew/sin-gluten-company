@@ -9,9 +9,12 @@ export default function Category() {
 
   return (
     <div>
-      <Filter />
+      <div style={{ backgroundColor: "rgb(0, 169, 181)", padding: "20px", margin:"20px 40px", borderRadius: "16px"}}>
+        <Filter />
+      </div>
       <CardList category={category} />
       <Suscribe />
     </div>
   );
 }
+
