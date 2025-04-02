@@ -40,17 +40,18 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px 25px;
+    padding: 10px 25px;
     gap: 20px;
-    background: none
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+    background-color: white;
+    border-radius:100px;
+    box-shadow:none;
   }
 
   /* for all social containers*/
   .socialContainer {
   width: 40px;
   height: 40px;
-  border-radius: 250px;
+  border-radius: 50px;
 background-color: rgba(237, 237, 237, 0.36); /* 50% de transparencia */
   display: flex;
   align-items: center;
@@ -80,10 +81,6 @@ background-color: rgba(237, 237, 237, 0.36); /* 50% de transparencia */
     transition-duration: 0.3s;
   }
 
-  .socialContainer:active {
-    transform: scale(0.9);
-    transition-duration: 0.3s;
-  }
 
   .socialSvg {
     width: 19px;

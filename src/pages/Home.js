@@ -11,6 +11,7 @@ import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
 
+
 const Home = () => {
   const [data, setData] = useState([]); 
   const [search, setSearch] = useState(""); 
@@ -57,6 +58,7 @@ const Home = () => {
     setLocation(loc);
     setShowDropdown(false); 
   };
+  
 
   
   const handleSearch = () => {
@@ -101,6 +103,7 @@ const Home = () => {
     setSuggestions([]); 
   };
 
+
   return (
     <div className="home-container">
       <div className="image-wrapper"></div>
@@ -113,11 +116,11 @@ const Home = () => {
         <div className="search-box">
           <div className="search-input" onClick={() => setShowDropdown(false)}>
             <span role="img" aria-label="search">
-              <ion-icon className="searchIcon" name="search-outline"></ion-icon>
+            <img src="/ionicons/search-outline.svg" alt="Search" className="searchIcon" />
             </span>
             <input
               type="text"
-              placeholder="¿Qué buscas?"
+              placeholder="¿Qué local buscas?"
               value={search}
               onChange={handleSearchChange} 
               onKeyDown={handleKeyDown} 
@@ -169,9 +172,16 @@ const Home = () => {
         <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
         <h3>{item["Nombre Local"]}</h3>
         <p>{item.Descripción}</p>
-        <a href={item.Link} target="_blank" rel="noopener noreferrer" className="card-link">
-          Ver más
-        </a>
+        <div className="ver-mas-container">
+        {item.link && (
+  <a href={item.link} target="_blank" rel="noopener noreferrer" className="ver-mas-link">
+    Ver más
+  </a>
+)}
+
+</div>
+
+
       </div>
     ))
   )}
@@ -184,11 +194,11 @@ const Home = () => {
   centeredSlides={true}
   slidesPerView="auto"
   loop={filteredResults.length > 5} 
-  autoplay={{ delay: 5500, disableOnInteraction: false }} 
+  autoplay={{ delay: 3000, disableOnInteraction: false }} 
   coverflowEffect={{
     rotate: 0,
     stretch: 0,
-    depth: 400,
+    depth: 200,
     modifier: 3,
     slideShadows: false,
   }}
@@ -213,20 +223,26 @@ const Home = () => {
       <div className="info-cards">
       <Card 
   title="Cerca mío" 
-  icon="location-outline" 
+  iconSrc="/ionicons/location-outline.svg"
   buttonText="Ver más" 
-  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"/>
+  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"
+/>
 
-  <Card 
+<Card 
   title="Suscribite" 
-  icon="mail-outline" 
+  iconSrc="/ionicons/mail-outline.svg"
   buttonText="Ver más" 
-  link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"/>
+  link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
+/>
+
 <Card 
   title="Adherí tu comercio" 
-  icon="storefront-outline" 
+  iconSrc="/ionicons/storefront-outline.svg"
   buttonText="Ver más" 
-  link="/adherir"/>
+  link="/adherir"
+/>
+
+
 
 </div>
       <div className="logos-container">

@@ -7,24 +7,22 @@ const Filter = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const tabs = [
-    { name: "Viandas-Comidas Congeladas", icon: "fast-food-outline" },
-    { name: "Restaurantes-Cafeterías", icon: "restaurant-outline" },
-    { name: "Panaderías-Pastelerías-Chocolaterías", icon: "cafe-outline" },
-    { name: "Envíos a todo el país", icon: "airplane-outline" },
-    { name: "Pizza-Empanadas-Pastas", icon: "pizza-outline" },
-    { name: "Almacenes-Dietéticas-Distribuidoras", icon: "storefront-outline" },
-    { name: "Heladerías", icon: "ice-cream-outline" },
-    { name: "POR EL MUNDO", icon: "globe-outline" },
-    { name: "Hotelería", icon: "bed-outline" },
+    { name: "Viandas-Comidas Congeladas", iconSrc: "/ionicons/fast-food-outline.svg" },
+    { name: "Restaurantes-Cafeterías", iconSrc: "/ionicons/restaurant-outline.svg" },
+    { name: "Panaderías-Pastelerías-Chocolaterías", iconSrc: "/ionicons/cafe-outline.svg" },
+    { name: "Envíos a todo el país", iconSrc: "/ionicons/airplane-outline.svg" },
+    { name: "Pizza-Empanadas-Pastas", iconSrc: "/ionicons/pizza-outline.svg" },
+    { name: "Almacenes-Dietéticas-Distribuidoras", iconSrc: "/ionicons/storefront-outline.svg" },
+    { name: "Heladerías", iconSrc: "/ionicons/ice-cream-outline.svg" },
+    { name: "POR EL MUNDO", iconSrc: "/ionicons/globe-outline.svg" },
+    { name: "Hotelería", iconSrc: "/ionicons/bed-outline.svg" },
   ];
 
   const handleClick = (index, category) => {
     if (activeIndex === index) {
-      // Si el botón ya está seleccionado, reseteamos y vamos a "/"
       setActiveIndex(null);
       navigate("/");
     } else {
-      // Convertimos el nombre a una URL válida (sin espacios)
       const formattedCategory = category.toLowerCase().replace(/\s+/g, "-");
       setActiveIndex(index);
       navigate(`/category/${formattedCategory}`);
@@ -33,7 +31,7 @@ const Filter = () => {
 
   return (
     <div className="filter-container">
-      {/* Primera fila (4 elementos) */}
+      {/* Primera fila */}
       <div className="tabs">
         {tabs.slice(0, 4).map((tab, i) => (
           <button
@@ -41,13 +39,13 @@ const Filter = () => {
             className={`tab ${activeIndex === i ? "active" : ""}`}
             onClick={() => handleClick(i, tab.name)}
           >
-            <ion-icon name={tab.icon}></ion-icon>
+            <img src={tab.iconSrc} alt={tab.name} className="tab-icon" />
             <span>{tab.name}</span>
           </button>
         ))}
       </div>
 
-      {/* Segunda fila (4 elementos) */}
+      {/* Segunda fila */}
       <div className="tabs second-row">
         {tabs.slice(4, 8).map((tab, i) => (
           <button
@@ -55,20 +53,20 @@ const Filter = () => {
             className={`tab ${activeIndex === i + 4 ? "active" : ""}`}
             onClick={() => handleClick(i + 4, tab.name)}
           >
-            <ion-icon name={tab.icon}></ion-icon>
+            <img src={tab.iconSrc} alt={tab.name} className="tab-icon" />
             <span>{tab.name}</span>
           </button>
         ))}
       </div>
 
-      {/* Tercera fila (1 solo elemento) */}
+      {/* Tercera fila */}
       <div className="tabs third-row">
         <button
           key={8}
           className={`tab single-tab ${activeIndex === 8 ? "active" : ""}`}
           onClick={() => handleClick(8, tabs[8].name)}
         >
-          <ion-icon name={tabs[8].icon}></ion-icon>
+          <img src={tabs[8].iconSrc} alt={tabs[8].name} className="tab-icon" />
           <span>{tabs[8].name}</span>
         </button>
       </div>

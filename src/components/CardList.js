@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
-import { Autocomplete, TextField, Button } from "@mui/material";
-import "./CardList.css"; 
-import vermas from "../components/VerMas";
+import { Autocomplete, TextField, Button, Tooltip } from "@mui/material";
+import "./CardList.css";
 
-const CARDS_PER_ROW = 5;  
-const INITIAL_ROWS = 5;  
+const CARDS_PER_ROW = 5;
+const INITIAL_ROWS = 5;
+
 const normalizeText = (text) => {
-  return text?.trim().toLowerCase().replace(/[-\s]+/g, " "); 
+  return text?.trim().toLowerCase().replace(/[-\s]+/g, " ");
 };
 
-
-
-
 const CardList = () => {
-  const { category } = useParams(); // Obtener la categoría desde la URL
+  const { category } = useParams();
+  const [currentCategory, setCurrentCategory] = useState("");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [visibleRows, setVisibleRows] = useState(INITIAL_ROWS);
   const [selectedFilters, setSelectedFilters] = useState({
     provincia: null,
     localidad: null,
-
   });
-  console.log("📌 Data completa antes de filtrar:", data);
-  console.log("📌 Categoría a filtrar:", category.replace("-", "").trim().toLowerCase());
-  
-  
+
+  useEffect(() => {
+    setCurrentCategory(category);
+  }, [category]);
+
   useEffect(() => {
     fetch("/SGCDB.xlsx")
       .then((res) => res.arrayBuffer())
@@ -36,75 +34,118 @@ const CardList = () => {
         const sheetName = workbook.SheetNames[0];
         const rawData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
-        setData(rawData); 
-        
+        setData(rawData);
       });
   }, []);
 
   useEffect(() => {
-    if (data.length > 0) {  // Solo filtra si hay datos cargados
-      console.log("📌 Data completa antes de filtrar EN USE EFFECT:", data);
-      console.log("📌 Categoría a filtrar:", category.replace("-", " ").trim().toLowerCase());
-  
-const filtered = data.filter(item => 
-  normalizeText(item.Categoría) === normalizeText(category)
-);
+    let filtered = data.filter(
+      (item) => normalizeText(item.Categoría) === normalizeText(category)
+    );
 
-  
-      console.log("✅ Datos filtrados:", filtered);
-      setFilteredData(filtered);
+    if (selectedFilters.provincia) {
+      filtered = filtered.filter(
+        (item) =>
+          normalizeText(item.Provincia) === normalizeText(selectedFilters.provincia)
+      );
     }
-  }, [category, data]);
-  
+
+    if (selectedFilters.localidad) {
+      filtered = filtered.filter(
+        (item) =>
+          normalizeText(item.Localidad) === normalizeText(selectedFilters.localidad)
+      );
+    }
+
+    setFilteredData(filtered);
+    setVisibleRows(INITIAL_ROWS);
+  }, [category, data, selectedFilters]);
 
   const handleFilterChange = (field, value) => {
-  const newFilters = { ...selectedFilters, [field]: value };
-  setSelectedFilters(newFilters);
+    const newFilters = { ...selectedFilters, [field]: value };
 
-  let filtered = data.filter(item =>
-    normalizeText(item.Categoría) === normalizeText(category)
-  );
+    // Si se elige una provincia, resetear localidad si no está en ella
+    if (field === "provincia") {
+      const availableLocalities = [
+        ...new Set(
+          data
+            .filter(
+              (item) =>
+                normalizeText(item.Categoría) === normalizeText(category) &&
+                normalizeText(item.Provincia) === normalizeText(value)
+            )
+            .map((item) => item.Localidad?.trim())
+        ),
+      ];
+      if (!availableLocalities.includes(selectedFilters.localidad)) {
+        newFilters.localidad = null;
+      }
+    }
 
-  if (newFilters.provincia) {
-    filtered = filtered.filter((item) => normalizeText(item.Provincia) === normalizeText(newFilters.provincia));
-  }
-  if (newFilters.localidad) {
-    filtered = filtered.filter((item) => normalizeText(item.Localidad) === normalizeText(newFilters.localidad));
-  }
+    // Si se elige una localidad, resetear provincia si no está en ella
+    if (field === "localidad") {
+      const matchingProvince = data.find(
+        (item) =>
+          normalizeText(item.Categoría) === normalizeText(category) &&
+          normalizeText(item.Localidad) === normalizeText(value)
+      )?.Provincia;
+      if (matchingProvince !== selectedFilters.provincia) {
+        newFilters.provincia = matchingProvince || null;
+      }
+    }
 
-  setFilteredData(filtered);
-  setVisibleRows(INITIAL_ROWS);
-};
+    setSelectedFilters(newFilters);
+  };
 
+  /** 🔥 Filtrar provincias y localidades dinámicamente */
+  const availableProvinces = [
+    ...new Set(
+      data
+        .filter(
+          (item) =>
+            normalizeText(item.Categoría) === normalizeText(category) &&
+            (!selectedFilters.localidad || normalizeText(item.Localidad) === normalizeText(selectedFilters.localidad))
+        )
+        .map((item) => item.Provincia?.trim())
+    ),
+  ];
+
+  const availableLocalities = [
+    ...new Set(
+      data
+        .filter(
+          (item) =>
+            normalizeText(item.Categoría) === normalizeText(category) &&
+            (!selectedFilters.provincia || normalizeText(item.Provincia) === normalizeText(selectedFilters.provincia))
+        )
+        .map((item) => item.Localidad?.trim())
+    ),
+  ];
 
   const handleShowMore = () => {
     setVisibleRows((prev) => prev + INITIAL_ROWS);
   };
-  console.log("Datos filtrados:", filteredData);
-  console.log("Categorías disponibles:", [...new Set(data.map(item => item.Categoría))]);
-
-
 
   return (
     <div className="container">
-<h2>
-  Descuentos en{" "}
-  {category
-    ? category.replace("-", " ").charAt(0).toUpperCase() + category.slice(1).replace("-", " ")
-    : "Todas las categorías"}
-</h2>
-
-
+      <h2>
+        Descuentos en{" "}
+        {currentCategory
+          ? currentCategory.replace(/-/g, " ").toLowerCase().replace(/^\w/, (c) => c.toUpperCase())
+          : "Todas las categorías"}
+      </h2>
 
       <div className="filtrosLocales">
         <Autocomplete
-          options={[...new Set(data.map((item) => item.Provincia?.trim()))]} 
+          options={availableProvinces}
+          value={selectedFilters.provincia}
           onChange={(event, newValue) => handleFilterChange("provincia", newValue)}
           renderInput={(params) => <TextField {...params} label="Provincia" />}
         />
 
         <Autocomplete
-          options={[...new Set(data.map((item) => item.Localidad?.trim()))]} 
+          options={availableLocalities}
+          value={selectedFilters.localidad}
           onChange={(event, newValue) => handleFilterChange("localidad", newValue)}
           renderInput={(params) => <TextField {...params} label="Localidad" />}
         />
@@ -113,21 +154,28 @@ const filtered = data.filter(item =>
       <div className="card-container">
         {filteredData.slice(0, visibleRows * CARDS_PER_ROW).map((local, index) => (
           <a key={index} href={local.link} target="_blank" rel="noopener noreferrer" className="card">
-            <img src="/default-image.jpg" alt="Imagen Local" className="card-image" />
-            <div className="card-content">
-              <h3 className="card-title">{local["Nombre Local"]}</h3>
-              <p className="card-description">{local.descripcion}</p>
-            </div>
+            <img
+              src={local.Imagen || "../Images/advertisment.jpg"}
+              alt={local["Nombre Local"]}
+              className="card-image"
+            />
+            <Tooltip title={local.descuento ? `Descuento: ${local.descuento}%` : "Sin descuento"} arrow>
+              <div className="card-content">
+                <h3 className="card-title">{local["Nombre Local"]}</h3>
+                <p className="card-description">{local.descripcion}</p>
+              </div>
+            </Tooltip>
           </a>
         ))}
       </div>
 
+      {filteredData.length === 0 && <p>No hay resultados disponibles.</p>}
+
       {visibleRows * CARDS_PER_ROW < filteredData.length && (
         <div className="ver-mas-container">
-          <Button variant="contained" onClick={handleShowMore} className="ver-mas-btn">
-            Ver más <ion-icon name="chevron-down-outline"></ion-icon>
+          <Button onClick={handleShowMore} className="ver-mas-btn">
+            Ver más
           </Button>
-          <vermas />
         </div>
       )}
     </div>

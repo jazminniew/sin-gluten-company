@@ -1,6 +1,5 @@
 .container {
   padding: 60px;
-  background-color: #E9EAEF;
   margin: 80px 0px;
   border-top: 6px solid rgb(0, 167, 170);; /* Borde negro de 2px */
   border-bottom: 6px solid rgb(0, 167, 170); /* Borde negro de 2px */
@@ -70,15 +69,30 @@
 }
 
 .ver-mas-btn {
-  background-color: #6a6a6a;
-  color: white;
+  background-color: #6a6a6a !important; /* Fondo gris */
+  color: white !important; /* Texto blanco */
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
+  border: none; /* Elimina cualquier borde de MUI */
+}
+.ver-mas-btn {
+  text-transform: none !important; /* Evita que el texto se convierta en mayúsculas */
 }
 
 .ver-mas-btn:hover {
-  background-color: #888888;
+  background-color: #888888 !important; /* Gris más claro al hacer hover */
 }
+
+
+
+.discount-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+}
+
+

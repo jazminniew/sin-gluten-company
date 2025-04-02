@@ -54,9 +54,18 @@
   padding: 30px 76px;
 }
 
-.tab ion-icon {
-  font-size: 32px;
-  margin-bottom: 8px;
+/* Ajuste de los iconos */
+.tab-icon {
+  width: 32px;  /* Tamaño del icono */
+  height: 32px;
+  margin-bottom: 8px; /* Espacio entre el icono y el texto */
+}
+
+.card-icon {
+  display: block !important;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
 /* Media queries para hacerlo responsive */
@@ -104,3 +113,4 @@
     padding: 15px 20px; /* Reducir padding también en la segunda fila */
   }
 }
+

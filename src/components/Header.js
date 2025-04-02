@@ -38,20 +38,6 @@ export default function Header() {
         <span className="company-name">SIN GLUTEN <span>COMPANY</span></span>
       </div>
 
-      {/* Redes sociales
-      <div className="social-icons hidden lg:flex items-center gap-4">
-        <a href="https://www.tiktok.com/@sin.gluten.compan?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-          <ion-icon name="logo-tiktok"></ion-icon>
-        </a>
-        <a href="https://www.instagram.com/singlutencompany?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <ion-icon name="logo-instagram"></ion-icon>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61566532809356" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <ion-icon name="logo-facebook"></ion-icon>
-        </a>
-      </div>
-       */}
-
 <div className="hidden lg:flex items-center gap-4">
   <SocialMedia />
 </div>

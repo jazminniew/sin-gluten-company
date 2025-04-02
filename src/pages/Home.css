@@ -297,9 +297,10 @@
   }
   
 .searchIcon{
-  color: rgba(74, 74, 74, 0.291);
+  color: rgba(220, 220, 220, 0.291);
   margin-top: 8px;
-  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 html, body {
@@ -429,6 +430,7 @@ html, body {
 .search-input input {
   color: white;  /* Asegúrate de que el texto sea negro o visible */
 }
+
 
 /* Media Queries */
 
@@ -603,4 +605,13 @@ html, body {
   .search-input {
     border-right: none; /* Elimina la línea divisoria */
   }
+}
+
+
+.ver-mas-link{
+  color: #00a8b5;
+}
+
+.ver-mas-link:hover{
+  text-decoration: underline;
 }
