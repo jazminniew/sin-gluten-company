@@ -21,6 +21,7 @@ const ContactForm = () => {
     let formattedValue = value;
     let error = false;
 
+    //validar el form
     if (id === "name") {
       formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
       error = formattedValue.trim() === "";
@@ -43,6 +44,7 @@ const ContactForm = () => {
     if (!isFormValid) return;
 
     const whatsappNumber = "+5491164386972"; 
+    //como quiero que el mensaje llegue a wspp
     const whatsappMessage = `Nuevo proveedor interesado:
     - Nombre del Local: ${form.name}
     - WhatsApp: ${form.whatsapp}

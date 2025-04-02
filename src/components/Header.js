@@ -4,9 +4,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from "../Images/logo.png"; 
-import BtnSolicita from './BtnSolicita';  // Importa el nuevo botón
-import SocialMedia from './SocialMedia'; // Importa el componente
-
+import BtnSolicita from './BtnSolicita';  
+import SocialMedia from './SocialMedia';
 
 export default function Header() {
   
@@ -23,10 +22,7 @@ export default function Header() {
     { label: 'Heladerías', route: '/category/heladerias' },
     { label: 'POR EL MUNDO', route: '/category/por-el-mundo' },
     { label: 'Hotelería', route: '/category/hoteleria' }
-  ];
-  
-
-  
+  ];  
 
   return (
     <header>
@@ -41,7 +37,6 @@ export default function Header() {
 <div className="hidden lg:flex items-center gap-4">
   <SocialMedia />
 </div>
-
 
       {/* Botones */}
       <div className="container-button">
@@ -61,7 +56,6 @@ export default function Header() {
           <Bars3Icon className="h-6 w-6" />
         </button>
       </div>
-
       
       <Dialog 
         open={mobileMenuOpen} 
@@ -129,8 +123,6 @@ export default function Header() {
           </div>
         </DialogPanel>
       </Dialog>
-
-
     </header>
   );
 }

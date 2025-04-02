@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import frontCard from "../Images/Front-card.png";
 import backCard from "../Images/Back-card.png";
 
-
 export default function Suscribe() {
   const [flipped, setFlipped] = useState(false);
 

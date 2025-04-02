@@ -11,8 +11,8 @@ import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
 
-
 const Home = () => {
+  // Estados para manejar los datos, búsqueda y filtrado
   const [data, setData] = useState([]); 
   const [search, setSearch] = useState(""); 
   const [location, setLocation] = useState("Provincia (Opcional)"); 
@@ -22,6 +22,7 @@ const Home = () => {
   const [suggestions, setSuggestions] = useState([]); 
   const [hasSearched, setHasSearched] = useState(false);
 
+  // Cargar datos desde el archivo Excel al montar el componente
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/SGCDB.xlsx");
@@ -33,6 +34,7 @@ const Home = () => {
     
       setData(parsedData);
     
+      // Obtener lista única de provincias
       const uniqueProvinces = [...new Set(parsedData.map((item) => item.Provincia))];
       setLocations(uniqueProvinces);
     };
@@ -40,6 +42,7 @@ const Home = () => {
     fetchData();
   }, []); 
 
+  // Cerrar el dropdown si se hace clic fuera de la búsqueda
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.search-container')) {
@@ -54,21 +57,19 @@ const Home = () => {
     };
   }, []);
   
+  // Seleccionar una provincia en el dropdown
   const handleLocationSelect = (loc) => {
     setLocation(loc);
     setShowDropdown(false); 
   };
   
-
-  
+  // Buscar locales por nombre y provincia
   const handleSearch = () => {
-    if (search.trim() === "") {
-      return;
-    }
+    if (search.trim() === "") return;
       
-    let results = data.filter((item) => {
-      return item["Nombre Local"] && item["Nombre Local"].toLowerCase().includes(search.toLowerCase());
-    });
+    let results = data.filter((item) => 
+      item["Nombre Local"] && item["Nombre Local"].toLowerCase().includes(search.toLowerCase())
+    );
   
     if (location && location !== "Provincia (Opcional)") {
       results = results.filter((item) => item.Provincia && item.Provincia === location);
@@ -78,12 +79,14 @@ const Home = () => {
     setHasSearched(true);
   };
   
+  // Ejecutar búsqueda al presionar Enter
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
 
+  // Manejar cambios en la barra de búsqueda y sugerencias
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
@@ -98,26 +101,26 @@ const Home = () => {
     }
   };
   
+  // Seleccionar una sugerencia
   const handleSuggestionClick = (suggestion) => {
     setSearch(suggestion["Nombre Local"]);
     setSuggestions([]); 
   };
 
-
   return (
     <div className="home-container">
       <div className="image-wrapper"></div>
       
+      {/* Filtros */}
       <div className="filters-container">
         <Filter />
       </div>
 
+      {/* Barra de búsqueda */}
       <div className="search-container">
         <div className="search-box">
           <div className="search-input" onClick={() => setShowDropdown(false)}>
-            <span role="img" aria-label="search">
             <img src="/ionicons/search-outline.svg" alt="Search" className="searchIcon" />
-            </span>
             <input
               type="text"
               placeholder="¿Qué local buscas?"
@@ -126,6 +129,7 @@ const Home = () => {
               onKeyDown={handleKeyDown} 
             />
 
+            {/* Sugerencias */}
             {suggestions.length > 0 && (
               <div className="suggestions-dropdown">
                 {suggestions.map((item, index) => (
@@ -141,17 +145,18 @@ const Home = () => {
             )}
           </div>
 
+          {/* Filtro por provincia */}
           <div className="search-location" onClick={() => setShowDropdown(!showDropdown)}>
             <span>{location}</span>
             <span role="img" aria-label="arrow">▼</span>
 
             {showDropdown && (
               <div className="dropdown">
-                <div className="dropdown-item" onClick={() => { setLocation("Provincia (Opcional)"); setShowDropdown(false); }}>
+                <div className="dropdown-item" onClick={() => handleLocationSelect("Provincia (Opcional)")}>
                   Todas las provincias
                 </div>
                 {locations.map((loc, index) => (
-                  <div key={index} className="dropdown-item" onClick={() => { setLocation(loc); setShowDropdown(false); }}>
+                  <div key={index} className="dropdown-item" onClick={() => handleLocationSelect(loc)}>
                     {loc}
                   </div>
                 ))}
@@ -163,117 +168,68 @@ const Home = () => {
         </div>
       </div>
 
-<div className="results-container">
-  {filteredResults.length === 0 && hasSearched ? (
-    <p>No se encontraron resultados.</p>
-  ) : (
-    filteredResults.map((item, index) => (
-      <div key={index} className="card">
-        <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
-        <h3>{item["Nombre Local"]}</h3>
-        <p>{item.Descripción}</p>
-        <div className="ver-mas-container">
-        {item.link && (
-  <a href={item.link} target="_blank" rel="noopener noreferrer" className="ver-mas-link">
-    Ver más
-  </a>
-)}
-
-</div>
-
-
+      {/* Resultados de búsqueda */}
+      <div className="results-container">
+        {filteredResults.length === 0 && hasSearched ? (
+          <p>No se encontraron resultados.</p>
+        ) : (
+          filteredResults.map((item, index) => (
+            <div key={index} className="card">
+              <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
+              <h3>{item["Nombre Local"]}</h3>
+              <p>{item.Descripción}</p>
+              <div className="ver-mas-container">
+                {item.link && (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="ver-mas-link">
+                    Ver más
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
-    ))
-  )}
-</div>
 
+      {/* Carrusel de promociones */}
       <div className="blue-section">
-      <Swiper
-  effect="coverflow"
-  grabCursor={false}
-  centeredSlides={true}
-  slidesPerView="auto"
-  loop={filteredResults.length > 5} 
-  autoplay={{ delay: 3000, disableOnInteraction: false }} 
-  coverflowEffect={{
-    rotate: 0,
-    stretch: 0,
-    depth: 200,
-    modifier: 3,
-    slideShadows: false,
-  }}
-  modules={[EffectCoverflow, Autoplay]}
-  className="mySwiper"
->
-
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 1" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 2" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 3" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-  <SwiperSlide><img src="/Images/fake-promo.png" alt="Imagen 4" /></SwiperSlide>
-
-</Swiper>
+        <Swiper
+          effect="coverflow"
+          grabCursor={false}
+          centeredSlides={true}
+          slidesPerView="auto"
+          loop={filteredResults.length > 5} 
+          autoplay={{ delay: 3000, disableOnInteraction: false }} 
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 200,
+            modifier: 3,
+            slideShadows: false,
+          }}
+          modules={[EffectCoverflow, Autoplay]}
+          className="mySwiper"
+        >
+          {[...Array(10)].map((_, i) => (
+            <SwiperSlide key={i}><img src="/Images/fake-promo.png" alt={`Imagen ${i + 1}`} /></SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
+      {/* Tarjetas de información */}
       <div className="info-cards">
-      <Card 
-  title="Cerca mío" 
-  iconSrc="/ionicons/location-outline.svg"
-  buttonText="Ver más" 
-  link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"
-/>
+        <Card title="Cerca mío" iconSrc="/ionicons/location-outline.svg" buttonText="Ver más" link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"/>
+        <Card title="Suscribite" iconSrc="/ionicons/mail-outline.svg" buttonText="Ver más" link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"/>
+        <Card title="Adherí tu comercio" iconSrc="/ionicons/storefront-outline.svg" buttonText="Ver más" link="/adherir"/>
+      </div>
 
-<Card 
-  title="Suscribite" 
-  iconSrc="/ionicons/mail-outline.svg"
-  buttonText="Ver más" 
-  link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
-/>
-
-<Card 
-  title="Adherí tu comercio" 
-  iconSrc="/ionicons/storefront-outline.svg"
-  buttonText="Ver más" 
-  link="/adherir"
-/>
-
-
-
-</div>
+      {/* Logos de empresas asociadas */}
       <div className="logos-container">
-  <div className="logos-slide">
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    {/* Se duplican los logos para la animación infinita */}
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-    <img src={logo} alt="Empresa 1"/>
-  </div>
-</div>
+        <div className="logos-slide">
+          {[...Array(12)].map((_, i) => <img key={i} src={logo} alt="Empresa" />)}
+        </div>
+      </div>
 
-<Suscribe />
+      <Suscribe />
     </div>
   );
 };

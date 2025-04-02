@@ -4,6 +4,7 @@ import * as XLSX from "xlsx";
 import { Autocomplete, TextField, Button, Tooltip } from "@mui/material";
 import "./CardList.css";
 
+//maximo 5 filas antes de presionar boton "ver mas"
 const CARDS_PER_ROW = 5;
 const INITIAL_ROWS = 5;
 
@@ -26,6 +27,7 @@ const CardList = () => {
     setCurrentCategory(category);
   }, [category]);
 
+//sacar las cosas del excel
   useEffect(() => {
     fetch("/SGCDB.xlsx")
       .then((res) => res.arrayBuffer())
@@ -43,6 +45,7 @@ const CardList = () => {
       (item) => normalizeText(item.Categoría) === normalizeText(category)
     );
 
+    //filtro de provincia
     if (selectedFilters.provincia) {
       filtered = filtered.filter(
         (item) =>
@@ -50,6 +53,7 @@ const CardList = () => {
       );
     }
 
+    //filtro de localidad
     if (selectedFilters.localidad) {
       filtered = filtered.filter(
         (item) =>
@@ -97,7 +101,7 @@ const CardList = () => {
     setSelectedFilters(newFilters);
   };
 
-  /** 🔥 Filtrar provincias y localidades dinámicamente */
+  /** Filtrar provincias y localidades dinámicamente */
   const availableProvinces = [
     ...new Set(
       data

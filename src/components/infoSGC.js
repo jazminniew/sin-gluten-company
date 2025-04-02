@@ -14,10 +14,9 @@ const InfoSGC = () => {
           Sin Gluten Company es una empresa dedicada, y en beneficio de la comunidad celíaca
           Sin Gluten Company es una empresa dedicada, y en beneficio de la comunidad celíaca
           y a todo aquel que consuma alimentos libre de gluten. Somos la primera <strong>TARJETA DE BENEFICIOS </strong> 
-           que conecta a los proveedores/marcas con el público <strong>GLUTEN FREE</strong>.
+          que conecta a los proveedores/marcas con el público <strong>GLUTEN FREE</strong>.
         </p>
-      </div>
-     
+      </div>     
       <div className="info-icons">
         <div className="group1">
         <img src={userIcon} alt="Usuario" />
@@ -26,11 +25,9 @@ const InfoSGC = () => {
         <div className="group2">
         <img src={glutenFreeIcon} alt="Sin gluten" />
         <img src={healthIcon} alt="Salud" />
-        </div>
- 
+        </div> 
       </div>
-    </div>
-    
+    </div>   
   );
 };
 

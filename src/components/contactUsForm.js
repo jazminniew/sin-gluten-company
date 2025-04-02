@@ -43,13 +43,14 @@ const ContactUsForm = () => {
     e.preventDefault();
     if (!isFormValid) return;
 
-  
+  //como quiero que llegue el mensaje a wspp
     const whatsappNumber = "+5491156565098"; 
     const whatsappMessage = `Nuevo cliente interesado:
     - Nombre: ${form.name} ${form.surname}
     - Email: ${form.email}
     - Mensaje: ${form.message}`;
 
+    //abrir wspp message
     const encodedMessage = encodeURIComponent(whatsappMessage);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
   };

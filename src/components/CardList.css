@@ -1,8 +1,8 @@
 .container {
   padding: 60px;
   margin: 80px 0px;
-  border-top: 6px solid rgb(0, 167, 170);; /* Borde negro de 2px */
-  border-bottom: 6px solid rgb(0, 167, 170); /* Borde negro de 2px */
+  border-top: 6px solid rgb(0, 167, 170);; 
+  border-bottom: 6px solid rgb(0, 167, 170); 
 }
 
 .card-container {
@@ -68,25 +68,24 @@
   margin-top: 15px;
 }
 
+/*Uso el important porque como es un componente precreado si no no me deja modificar*/
 .ver-mas-btn {
-  background-color: #6a6a6a !important; /* Fondo gris */
-  color: white !important; /* Texto blanco */
+  background-color: #6a6a6a !important; 
+  color: white !important; 
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
-  border: none; /* Elimina cualquier borde de MUI */
+  border: none; 
 }
 .ver-mas-btn {
-  text-transform: none !important; /* Evita que el texto se convierta en mayúsculas */
+  text-transform: none !important; 
 }
 
 .ver-mas-btn:hover {
-  background-color: #888888 !important; /* Gris más claro al hacer hover */
+  background-color: #888888 !important; 
 }
-
-
 
 .discount-text {
   font-size: 14px;

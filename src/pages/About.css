@@ -1,4 +1,3 @@
- 
   .about-text {
     font-size: 1.4rem;
     font-weight: 500;
@@ -9,70 +8,56 @@
     margin: 0 0 60px 0;
   }
 
-
-  /* Para tabletas */
 @media (max-width: 1024px) {
-  /* Ajuste para el texto */
   .about-text {
-    font-size: 1.2rem; /* Reducir tamaño de fuente en tabletas */
-    margin: 0 0 20px 20px; /* Ajustar márgenes */
+    font-size: 1.2rem; 
+    margin: 0 0 20px 20px; 
   }
 
-  /* Para la sección */
   .about-section {
-    margin: 0 20px 60px 20px; /* Ajustar márgenes */
+    margin: 0 20px 60px 20px; 
   }
 
-  /* Ajustar las cartas para tabletas: 2 arriba y 1 abajo */
   .our-locals .local-card {
-    width: 30%; /* Dos cartas por fila */
+    width: 30%; 
     margin-bottom: 20px;
   }
 
-  /* Limitar a 6 cartas (ocultar las cartas extras) */
   .our-locals .local-card:nth-child(n+7) {
-    display: none; /* Ocultar cartas adicionales */
+    display: none; 
   }
 }
 
-/* Para dispositivos móviles */
 @media (max-width: 768px) {
-  /* Ajuste para el texto */
   .about-text {
-    font-size: 1.1rem; /* Reducir tamaño de fuente en móviles */
-    margin: 0 0 15px 15px; /* Ajustar márgenes */
+    font-size: 1.1rem;
+    margin: 0 0 15px 15px; 
   }
 
-  /* Para la sección: colocar el texto arriba y la imagen abajo */
   .about-section {
     display: flex;
-    flex-direction: column; /* Coloca el contenido en una columna */
-    align-items: center; /* Centrar todo el contenido */
+    flex-direction: column; 
+    align-items: center; 
   }
 
-  /* Ajustar las cartas para móviles */
   .our-locals .local-card {
-    width: 33%; /* Mantener 3 cartas por fila */
+    width: 33%; 
     margin-bottom: 20px;
   }
 
-  /* Limitar a 6 cartas (ocultar las cartas extras) */
   .our-locals .local-card:nth-child(n+7) {
-    display: none; /* Ocultar cartas adicionales */
+    display: none; 
   }
 }
 
-/* Para pantallas muy pequeñas (como teléfonos muy pequeños) */
 @media (max-width: 480px) {
-  /* Ajuste para el texto */
   .about-text {
-    font-size: 1rem; /* Reducir aún más el tamaño de fuente */
-    margin: 0 0 10px 10px; /* Ajustar márgenes */
+    font-size: 1rem; 
+    margin: 0 0 10px 10px; 
   }
 
-  /* Ajustar las cartas para pantallas más pequeñas */
   .our-locals .local-card {
-    width: 90%; /* Mostrar solo una carta por fila */
+    width: 90%; 
     margin-bottom: 20px;
   }
 }

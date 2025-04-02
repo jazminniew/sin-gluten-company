@@ -12,8 +12,8 @@
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  flex-wrap: wrap; /* Esto permite que los elementos se acomoden cuando no haya espacio */
-  justify-content: center; /* Asegura que los botones se centren */
+  flex-wrap: wrap; 
+  justify-content: center; 
 }
 
 .second-row {
@@ -54,11 +54,10 @@
   padding: 30px 76px;
 }
 
-/* Ajuste de los iconos */
 .tab-icon {
-  width: 32px;  /* Tamaño del icono */
+  width: 32px;  
   height: 32px;
-  margin-bottom: 8px; /* Espacio entre el icono y el texto */
+  margin-bottom: 8px; 
 }
 
 .card-icon {
@@ -72,13 +71,13 @@
 
 @media (max-width: 768px) {
   .tabs {
-    flex-direction: column; /* Los botones se apilan verticalmente */
-    justify-content: flex-start; /* Los botones se alinean al inicio */
+    flex-direction: column; 
+    justify-content: flex-start; 
   }
 
   .tab {
-    padding: 20px 40px; /* Reducir el tamaño del padding para pantallas más pequeñas */
-    font-size: 1rem; /* Aumentar ligeramente el tamaño del texto */
+    padding: 20px 40px; 
+    font-size: 1rem; 
   }
 
   .second-row .tab {
@@ -86,7 +85,7 @@
   }
 
   .single-tab {
-    width: 250px; /* Ajustar el tamaño del solo tab */
+    width: 250px; 
   }
 
   .third-row {
@@ -96,21 +95,21 @@
 
 @media (max-width: 480px) {
   .tabs {
-    flex-direction: column; /* Asegurarse de que los botones se apilen en pantallas muy pequeñas */
-    width: 100%; /* Los botones ocupan el ancho completo */
+    flex-direction: column; 
+    width: 100%; 
   }
 
   .tab {
-    padding: 15px 20px; /* Asegurar que el padding no sea demasiado grande en pantallas pequeñas */
-    font-size: 0.9rem; /* Reducir un poco el tamaño del texto */
+    padding: 15px 20px; 
+    font-size: 0.9rem; 
   }
 
   .single-tab {
-    width: 200px; /* Ajustar el tamaño de la única pestaña */
+    width: 200px; 
   }
 
   .second-row .tab {
-    padding: 15px 20px; /* Reducir padding también en la segunda fila */
+    padding: 15px 20px; 
   }
 }
 

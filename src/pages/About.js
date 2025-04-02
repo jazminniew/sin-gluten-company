@@ -13,8 +13,7 @@ const About = () => {
       <div className="about-section">
       <OurLocals/>
       </div>
-      <Suscribe/>
-     
+      <Suscribe/>     
     </div>
   );
 };

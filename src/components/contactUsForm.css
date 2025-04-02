@@ -6,10 +6,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     margin: 80px auto;
-    
   }
 
-  
   .contact-info {
     width: 33%;
     background: #00838f;
@@ -27,17 +25,10 @@
     display: flex;
     align-items: center;
     margin: 25px 0;
-
   }
 
-  ion-icon {
-    margin-right: 10px;
-    font-size: 25px;
-  }
-  
   .contact-form {
     padding: 20px;
-
   }
   
   .contact-form h2 {
@@ -93,8 +84,7 @@
   }
   .form-input {
     margin-bottom: 10px !important; /* Ajusta el valor según el espacio deseado */
-}
-
+  }
   
 .title{
   font-size: 2.25rem ;

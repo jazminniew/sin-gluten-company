@@ -11,11 +11,10 @@
   }
   
   .footer-logo img {
-    width: 60px; /* Ajusta el tamaño */
-    height: auto; /* Mantiene la proporción */
+    width: 60px; 
+    height: auto; 
   }
-  
-  
+    
   .footer-help h3 {
     font-size: 1rem;
     font-weight: bold;

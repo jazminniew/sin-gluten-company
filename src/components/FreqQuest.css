@@ -32,7 +32,6 @@
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* Clase activa cuando la respuesta está visible */
 .answer.open {
     max-height: 200px; 
     opacity: 1;

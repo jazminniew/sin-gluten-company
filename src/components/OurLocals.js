@@ -15,7 +15,7 @@ const localsData = [
   { name: "Local 2", image: "ruta-del-logo-local2.png", link: "https://instagram.com" },
   { name: "Local 3", image: "ruta-del-logo-local3.png", link: "https://instagram.com" },
   { name: "Local 4", image: "ruta-del-logo-local4.png", link: "https://instagram.com" },
-  // Agrega más datos de locales aquí...
+  // Agregar más datos de locales aca...
 ];
 
 const OurLocals = () => {

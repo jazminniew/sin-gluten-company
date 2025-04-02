@@ -14,13 +14,7 @@ const LogoSlider = () => {
         if (data && data.data && data.data.length > 0) {
             const logosArray = data?.data?.[0]?.attributes?.imagenes?.data?.map(
                 (img) => img.attributes.url
-              );
-              
-              
-              
-              console.log(logosArray); // Verifica en la consola las URLs generadas
-              
-  
+              );           
           if (logosArray) {
             setLogos(logosArray);
           } else {
@@ -31,10 +25,7 @@ const LogoSlider = () => {
         }
       })
       .catch((error) => console.error("Error:", error));
-  }, []);
-  
-  
-  
+  }, []);  
   
   return (
     <div className="logos-container">

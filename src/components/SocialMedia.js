@@ -96,10 +96,6 @@ background-color: rgba(237, 237, 237, 0.36); /* 50% de transparencia */
   fill: #ffffff !important;
 }
 
-
-
-
-
   .socialContainer:hover .socialSvg {
     animation: slide-in-top 0.3s both;
   }
