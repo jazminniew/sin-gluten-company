@@ -63,7 +63,7 @@ const ContactForm = () => {
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
         <TextField id="name" label="Nombre del Local" fullWidth value={form.name} onChange={handleChange} error={errors.name} helperText={errors.name ? "El nombre no puede estar vacío" : ""} />
-        <TextField id="whatsapp" label="WhatsApp" fullWidth value={form.whatsapp} onChange={handleChange} error={errors.whatsapp} helperText={errors.whatsapp ? "Debe ser un número entre 10 y 15 dígitos" : ""} />
+        <TextField id="whatsapp" label="Teléfono" fullWidth value={form.whatsapp} onChange={handleChange} error={errors.whatsapp} helperText={errors.whatsapp ? "Debe ser un número entre 10 y 15 dígitos" : ""} />
         <TextField id="instagram" label="Instagram" fullWidth value={form.instagram} onChange={handleChange} />
         <TextField id="message" label="Mensaje" fullWidth multiline rows={4} value={form.message} onChange={handleChange} error={errors.message} helperText={errors.message ? "Debe tener entre 10 y 500 caracteres" : ""} />
         <button type="submit" className="form-button" disabled={!isFormValid}>Enviar</button>
