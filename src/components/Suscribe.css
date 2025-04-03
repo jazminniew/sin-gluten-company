@@ -98,7 +98,16 @@
   
     .container-button a, 
     .container-button button {
-      width: 80%; /* Opcional: Para que los botones sean más anchos en móvil */
+      width: 75%; /* Opcional: Para que los botones sean más anchos en móvil */
       text-align: center; /* Asegura que el texto esté centrado */
     }
+
+    .flipper {
+      width: 80%;
+      height: 80%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      margin-left: 40px;
+  }
   }

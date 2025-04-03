@@ -75,16 +75,16 @@
   }
 
   .tab {
-    padding: 20px 40px; 
+    padding: 10px 30px; 
     font-size: 1rem; 
   }
 
   .second-row .tab {
-    padding: 20px 50px;
+    padding: 10px 30px;
   }
 
   .single-tab {
-    width: 250px; 
+    width: 330px; 
   }
 
   .third-row {

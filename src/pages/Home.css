@@ -597,3 +597,50 @@ color: #00a8b5;
 .ver-mas-link:hover{
 text-decoration: underline;
 }
+/* RESPONSIVE para tablets y móviles */
+@media (max-width: 1024px) { /* Para tablets */
+  .mySwiper {
+    width: 90%;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 768px) { /* Para celulares */
+  .mySwiper {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .blue-section {
+    padding: 10px; /* Reducir el padding en móviles */
+  }
+
+  button.tab.single-tab {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+}
+
+@media (max-width: 480px) { /* Para celulares pequeños */
+  .mySwiper {
+    width: 100%;
+    max-width: 400px; /* Reducir aún más el tamaño */
+  }
+
+  .blue-section {
+    padding: 5px; /* Menos espacio alrededor */
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mySwiper img {
+    max-width: 350px; /* Ajustar imágenes */
+    height: 150px;
+    margin-left: 120px;
+    margin-top: 75px;
+  }
+}

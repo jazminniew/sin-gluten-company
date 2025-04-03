@@ -123,12 +123,16 @@ const cardVariants = {
 
 
   return (
+    <div>
     <motion.div 
       className="home-container"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
     >
+      <div className="image-wrapper">
+        <img src="../advertisment.jpg" alt="Anuncio" />
+      </div>
       {/* Contenedor de filtros con animación */}
       <motion.div 
         className="filters-container"
@@ -267,9 +271,10 @@ const cardVariants = {
           {[...Array(12)].map((_, i) => <img key={i} src={logo} alt="Empresa" />)}
         </div>
       </div>
-  
-      <Suscribe />
     </motion.div>
+
+    <Suscribe/>
+    </div>
   );
   
 };
