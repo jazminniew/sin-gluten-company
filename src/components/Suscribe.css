@@ -22,14 +22,22 @@
     margin-bottom: 20px;
   }
   
+  .container-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre botones */
+  }
+
   .subscribe-btn {
     background-color: #00a8b5;
     color: white;
     font-size: 0.9rem;
-    padding: 15px 60px;
+    padding: 15px 40px;
     border: none;
     cursor: pointer;
     border-radius: 100px;
+    margin: 0px 0px;
   }
   
   .subscribe-btn:hover {
@@ -81,4 +89,16 @@
   }
   
 
+  @media (max-width: 768px) { 
+    .container-button {
+      flex-direction: column; /* Apila los botones verticalmente */
+      align-items: center; /* Centra los botones */
+      width: 100%; /* Que ocupen todo el ancho disponible */
+    }
   
+    .container-button a, 
+    .container-button button {
+      width: 80%; /* Opcional: Para que los botones sean más anchos en móvil */
+      text-align: center; /* Asegura que el texto esté centrado */
+    }
+  }

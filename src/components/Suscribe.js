@@ -12,12 +12,21 @@ export default function Suscribe() {
       <div className="text-section">
         <h3>¡Suscribite Ahora!</h3>
         <h4>Adherite a la tarjeta de beneficios y empezá a ahorrar!!</h4>
+        <div className="container-button">
         <button 
           className="subscribe-btn" 
           onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/", "_blank")}
         >
-          Suscribirme
+          Suscripción mensual
         </button>
+
+        <button 
+          className="subscribe-btn" 
+          onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/", "_blank")}
+        >
+          Suscripción semestral
+        </button>
+      </div>
       </div>
 
       {/* Animación al hacer scroll */}
