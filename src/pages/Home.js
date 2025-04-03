@@ -10,6 +10,7 @@ import "swiper/css/autoplay";
 import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
+import { motion } from "framer-motion";
 
 const Home = () => {
   // Estados para manejar los datos, búsqueda y filtrado
@@ -107,15 +108,37 @@ const Home = () => {
     setSuggestions([]); 
   };
 
-  return (
-    <div className="home-container">
-      <div className="image-wrapper"></div>
-      
-      {/* Filtros */}
-      <div className="filters-container">
-        <Filter />
-      </div>
+const cardVariants = {
+  hidden: { opacity: 0, y: 80 }, // Aumenta la distancia inicial para que suba más
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 1, ease: "easeOut" } // Duración más larga
+  },
+  hover: { 
+    scale: 1.1,  // Aumenta el efecto de agrandamiento
+    transition: { duration: 0.3, ease: "easeInOut" } 
+  },
+};
 
+
+  return (
+    <motion.div 
+      className="home-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+    >
+      {/* Contenedor de filtros con animación */}
+      <motion.div 
+        className="filters-container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <Filter />
+      </motion.div>
+  
       {/* Barra de búsqueda */}
       <div className="search-container">
         <div className="search-box">
@@ -128,7 +151,7 @@ const Home = () => {
               onChange={handleSearchChange} 
               onKeyDown={handleKeyDown} 
             />
-
+  
             {/* Sugerencias */}
             {suggestions.length > 0 && (
               <div className="suggestions-dropdown">
@@ -144,12 +167,12 @@ const Home = () => {
               </div>
             )}
           </div>
-
+  
           {/* Filtro por provincia */}
           <div className="search-location" onClick={() => setShowDropdown(!showDropdown)}>
             <span>{location}</span>
             <span role="img" aria-label="arrow">▼</span>
-
+  
             {showDropdown && (
               <div className="dropdown">
                 <div className="dropdown-item" onClick={() => handleLocationSelect("Provincia (Opcional)")}>
@@ -163,11 +186,11 @@ const Home = () => {
               </div>
             )}
           </div>
-
+  
           <button className="search-button" onClick={handleSearch}>Buscar</button>
         </div>
       </div>
-
+  
       {/* Resultados de búsqueda */}
       <div className="results-container">
         {filteredResults.length === 0 && hasSearched ? (
@@ -189,7 +212,7 @@ const Home = () => {
           ))
         )}
       </div>
-
+  
       {/* Carrusel de promociones */}
       <div className="blue-section">
         <Swiper
@@ -214,24 +237,41 @@ const Home = () => {
           ))}
         </Swiper>
       </div>
-
+  
       {/* Tarjetas de información */}
       <div className="info-cards">
-        <Card title="Cerca mío" iconSrc="/ionicons/location-outline.svg" buttonText="Ver más" link="https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i"/>
-        <Card title="Suscribite" iconSrc="/ionicons/mail-outline.svg" buttonText="Ver más" link="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"/>
-        <Card title="Adherí tu comercio" iconSrc="/ionicons/storefront-outline.svg" buttonText="Ver más" link="/adherir"/>
-      </div>
-
+      {[
+        { title: "Cerca mío", iconSrc: "/ionicons/location-outline.svg", link: "https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i" },
+        { title: "Suscribite", iconSrc: "/ionicons/mail-outline.svg", link: "https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" },
+        { title: "Adherí tu comercio", iconSrc: "/ionicons/storefront-outline.svg", link: "/adherir" },
+      ].map((item, index) => (
+        <motion.div 
+        key={index}
+        className="card-wrapper"
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hover"
+        viewport={{ once: true, amount: 0.1 }}
+        onViewportEnter={() => console.log(`Tarjeta ${index} visible`)}
+      >
+        <Card title={item.title} iconSrc={item.iconSrc} buttonText="Ver más" link={item.link} />
+      </motion.div>
+      
+      ))}
+    </div>
+  
       {/* Logos de empresas asociadas */}
       <div className="logos-container">
         <div className="logos-slide">
           {[...Array(12)].map((_, i) => <img key={i} src={logo} alt="Empresa" />)}
         </div>
       </div>
-
+  
       <Suscribe />
-    </div>
+    </motion.div>
   );
+  
 };
 
 export default Home;
