@@ -8,7 +8,7 @@ const LocalCard = ({ name, image, link }) => {
         className="local-image-placeholder"
         style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
       ></div>
-      <p className="local-name">{name}</p> {/* Aca mostramos el nombre dinámico */}
+      <p className="local-name">{name}</p> 
     </a>
   );
 };

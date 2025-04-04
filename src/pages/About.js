@@ -1,7 +1,6 @@
 import React from "react";
 import InfoSGC from "../components/infoSGC"; 
 import OurLocals from "../components/OurLocals"; 
-import Filter from "../components/Filter";
 import Suscribe from "../components/Suscribe";
 import "./About.css";
 
