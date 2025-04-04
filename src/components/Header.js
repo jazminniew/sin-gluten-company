@@ -63,65 +63,90 @@ export default function Header() {
         onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)} 
         className="lg:hidden"
       >
-        <DialogPanel className="fixed inset-0 bg-white p-6 z-50 overflow-y-auto rounded-3xl">
-          <div className="flex justify-between items-center mb-8">
-            <Link to="/" className="logo">
-              <img 
-                src={logo} 
-                alt="Sin Gluten Company" 
-                style={{ 
-                  width: "60px", 
-                  borderRadius: "12px", 
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)" 
-                }} 
-              />
-            </Link>
-            <button 
-              onClick={() => setMobileMenuOpen(false)} 
-              className="text-gray-700 hover:bg-gray-100 p-2 rounded-full transition" 
-              aria-label="Cerrar menú móvil"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
+      <DialogPanel className="fixed inset-0 bg-white p-6 z-50 overflow-y-auto rounded-3xl">
+  <div className="flex justify-between items-center mb-8">
+    <Link to="/" className="logo">
+      <img
+        src={logo}
+        alt="Sin Gluten Company"
+        style={{
+          width: "80px",
+          height: "80px", // Aumenté el ancho para que sea más visible
+          borderRadius: "12px",
+        }}
+      />
+    </Link>
+    <button
+      onClick={() => setMobileMenuOpen(false)}
+      className="text-gray-700 hover:bg-gray-100 p-2 rounded-full transition"
+      aria-label="Cerrar menú móvil"
+    >
+      <XMarkIcon className="h-6 w-6" />
+    </button>
+  </div>
 
-          <div className="space-y-4">
-            {/* Sección de Acciones */}
-            <div className="bg-gray-50 rounded-xl p-4 mb-6 shadow-sm">
-              <div className="space-y-3">
-                <Link 
-                  to="/adherir"
-                  className="block bg-white border border-gray-200 text-gray-800 text-base py-3 px-4 rounded-lg hover:bg-gray-100 transition text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Adherí tu Comercio
-                </Link>
-                <Link 
-                  to="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
-                  className="block text-blue-600 text-base text-center font-semibold hover:text-blue-800 transition"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Solicitar Tarjeta
-                </Link>
-              </div>
-            </div>
+  <div className="space-y-4">
+    {/* Sección de Acciones */}
+    <div className="bg-gray-50 rounded-xl p-4 mb-6 shadow-sm">
+      <div className="space-y-3">
+        {/* Botón primario: Solicitar Tarjeta (ahora arriba) */}
+        <a
+          href="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <button
+            className="w-full"
+            style={{
+              padding: "12px 16px",
+              backgroundColor: "#00aaba",
+              color: "white",
+              fontSize: "0.9rem",
+              fontWeight: 600,
+              borderRadius: "999px",
+              transition: "background-color 0.3s",
+            }}
+          >
+            Solicitar Tarjeta
+          </button>
+        </a>
+        {/* Botón secundario: Adherí tu Comercio (ahora abajo) */}
+        <Link to="/adherir" onClick={() => setMobileMenuOpen(false)}>
+          <button
+            className="w-full"
+            style={{
+              padding: "12px 16px",
+              backgroundColor: "transparent",
+              color: "rgb(133, 133, 133)",
+              fontSize: "0.9rem",
+              fontWeight: 600,
+              borderRadius: "999px",
+              transition: "background-color 0.3s",
+            }}
+          >
+            Adherí tu Comercio
+          </button>
+        </Link>
+      </div>
+    </div>
 
-            {/* Sección de Categorías */}
-            <div className="space-y-3">
-              <h2 className="text-lg font-semibold text-gray-700 px-4">Categorías</h2>
-              {menuItems.slice(1).map((item, index) => (
-                <Link 
-                  key={index}
-                  to={item.route}
-                  className="block text-gray-600 text-base py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </DialogPanel>
+    {/* Sección de Categorías (sin cambios) */}
+    <div className="space-y-3">
+      <h2 className="text-lg font-semibold text-gray-700 px-4">Categorías</h2>
+      {menuItems.slice(1).map((item, index) => (
+        <Link
+          key={index}
+          to={item.route}
+          className="block text-gray-600 text-base py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  </div>
+</DialogPanel>
       </Dialog>
     </header>
   );
