@@ -22,6 +22,9 @@ const Home = () => {
   const [filteredResults, setFilteredResults] = useState([]); 
   const [suggestions, setSuggestions] = useState([]); 
   const [hasSearched, setHasSearched] = useState(false);
+  const [carouselImages, setCarouselImages] = useState([]);
+const [logoCarousel, setLogoCarousel] = useState([]);
+
 
   // Cargar datos desde el archivo Excel al montar el componente
   useEffect(() => {
@@ -34,6 +37,11 @@ const Home = () => {
       const parsedData = XLSX.utils.sheet_to_json(sheet);
     
       setData(parsedData);
+      const carImages = parsedData.filter(item => item.carrouselImages).map(item => item.carrouselImages);
+setCarouselImages(carImages);
+const logoImages = parsedData.filter(item => item.logoCarrousel).map(item => item.logoCarrousel);
+setLogoCarousel(logoImages);
+
     
       // Obtener lista única de provincias
       const uniqueProvinces = [...new Set(parsedData.map((item) => item.Provincia))];
@@ -218,27 +226,22 @@ const cardVariants = {
   
       {/* Carrusel de promociones */}
       <div className="blue-section">
-        <Swiper
-          effect="coverflow"
-          grabCursor={false}
-          centeredSlides={true}
-          slidesPerView="auto"
-          loop={filteredResults.length > 5} 
-          autoplay={{ delay: 3000, disableOnInteraction: false }} 
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 200,
-            modifier: 3,
-            slideShadows: false,
-          }}
-          modules={[EffectCoverflow, Autoplay]}
-          className="mySwiper"
-        >
-          {[...Array(10)].map((_, i) => (
-            <SwiperSlide key={i}><img src="/Images/fake-promo.png" alt={`Imagen ${i + 1}`} /></SwiperSlide>
-          ))}
-        </Swiper>
+      <Swiper
+  effect="coverflow"
+  grabCursor={false}
+  centeredSlides={true}
+  slidesPerView="auto"
+  loop={carouselImages.length > 5}
+  autoplay={{ delay: 3000, disableOnInteraction: false }}
+  coverflowEffect={{ rotate: 0, stretch: 0, depth: 200, modifier: 3, slideShadows: false }}
+  modules={[EffectCoverflow, Autoplay]}
+  className="mySwiper"
+>
+  {carouselImages.map((img, i) => (
+    <SwiperSlide key={i}><img src={img} alt={`Imagen ${i + 1}`} /></SwiperSlide>
+  ))}
+</Swiper>
+
       </div>
   
       {/* Tarjetas de información */}
@@ -266,10 +269,11 @@ const cardVariants = {
   
       {/* Logos de empresas asociadas */}
       <div className="logos-container">
-        <div className="logos-slide">
-          {[...Array(12)].map((_, i) => <img key={i} src={logo} alt="Empresa" />)}
-        </div>
-      </div>
+  <div className="logos-slide">
+    {logoCarousel.map((img, i) => <img key={i} src={img} alt="Empresa" />)}
+  </div>
+</div>
+
     </motion.div>
 
     <Suscribe/>
