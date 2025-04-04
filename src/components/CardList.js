@@ -4,12 +4,19 @@ import * as XLSX from "xlsx";
 import { Autocomplete, TextField, Button, Tooltip } from "@mui/material";
 import "./CardList.css";
 
-//maximo 5 filas antes de presionar boton "ver mas"
 const CARDS_PER_ROW = 5;
 const INITIAL_ROWS = 5;
 
-const normalizeText = (text) => {
-  return text?.trim().toLowerCase().replace(/[-\s]+/g, " ");
+// Normaliza el texto para comparaciones
+const normalizeText = (text) =>
+  text?.trim().toLowerCase().replace(/[-\s]+/g, " ");
+
+// Mapeo entre el nombre de la columna en el Excel y la propiedad interna de los filtros
+const fieldMapping = {
+  Provincia: "provincia",
+  Localidad: "localidad",
+  beneficio: "beneficio",
+  formaVenta: "formaVenta",
 };
 
 const CardList = () => {
@@ -21,13 +28,16 @@ const CardList = () => {
   const [selectedFilters, setSelectedFilters] = useState({
     provincia: null,
     localidad: null,
+    beneficio: null,
+    formaVenta: null,
   });
 
+  // Actualiza la categoría actual
   useEffect(() => {
     setCurrentCategory(category);
   }, [category]);
 
-//sacar las cosas del excel
+  // Carga el Excel
   useEffect(() => {
     fetch("/SGCDB.xlsx")
       .then((res) => res.arrayBuffer())
@@ -35,107 +45,104 @@ const CardList = () => {
         const workbook = XLSX.read(buffer, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const rawData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
         setData(rawData);
       });
   }, []);
 
-  useEffect(() => {
-    let filtered = data.filter(
+  // Base filtrada por categoría
+  const getFilteredBase = () =>
+    data.filter(
       (item) => normalizeText(item.Categoría) === normalizeText(category)
     );
 
-    //filtro de provincia
-    if (selectedFilters.provincia) {
-      filtered = filtered.filter(
-        (item) =>
-          normalizeText(item.Provincia) === normalizeText(selectedFilters.provincia)
-      );
-    }
-
-    //filtro de localidad
-    if (selectedFilters.localidad) {
-      filtered = filtered.filter(
-        (item) =>
-          normalizeText(item.Localidad) === normalizeText(selectedFilters.localidad)
-      );
-    }
-
-    setFilteredData(filtered);
-    setVisibleRows(INITIAL_ROWS);
-  }, [category, data, selectedFilters]);
-
-  const handleFilterChange = (field, value) => {
-    const newFilters = { ...selectedFilters, [field]: value };
-
-    // Si se elige una provincia, resetear localidad si no está en ella
-    if (field === "provincia") {
-      const availableLocalities = [
-        ...new Set(
-          data
-            .filter(
-              (item) =>
-                normalizeText(item.Categoría) === normalizeText(category) &&
-                normalizeText(item.Provincia) === normalizeText(value)
-            )
-            .map((item) => item.Localidad?.trim())
-        ),
-      ];
-      if (!availableLocalities.includes(selectedFilters.localidad)) {
-        newFilters.localidad = null;
-      }
-    }
-
-    // Si se elige una localidad, resetear provincia si no está en ella
-    if (field === "localidad") {
-      const matchingProvince = data.find(
-        (item) =>
-          normalizeText(item.Categoría) === normalizeText(category) &&
-          normalizeText(item.Localidad) === normalizeText(value)
-      )?.Provincia;
-      if (matchingProvince !== selectedFilters.provincia) {
-        newFilters.provincia = matchingProvince || null;
-      }
-    }
-
-    setSelectedFilters(newFilters);
+  // Filtra los datos aplicando TODOS los filtros (usando el mapping)
+  const getFilteredDataWithFilters = () => {
+    return getFilteredBase().filter((item) =>
+      Object.entries(fieldMapping).every(([excelKey, stateKey]) => {
+        return (
+          !selectedFilters[stateKey] ||
+          normalizeText(item[excelKey]) === normalizeText(selectedFilters[stateKey])
+        );
+      })
+    );
   };
 
-  /** Filtrar provincias y localidades dinámicamente */
-  const availableProvinces = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            normalizeText(item.Categoría) === normalizeText(category) &&
-            (!selectedFilters.localidad || normalizeText(item.Localidad) === normalizeText(selectedFilters.localidad))
-        )
-        .map((item) => item.Provincia?.trim())
-    ),
-  ];
+  // Devuelve las opciones disponibles para un filtro dado (ej. "Provincia") según los otros filtros ya aplicados
+  const getOptions = (excelKey, filters = selectedFilters) => {
+    const base = getFilteredBase().filter((item) => {
+      let valid = true;
+      // Recorre todos los filtros menos el que estamos generando opciones
+      Object.entries(fieldMapping).forEach(([key, stateKey]) => {
+        if (key === excelKey) return;
+        if (filters[stateKey] && normalizeText(item[key]) !== normalizeText(filters[stateKey])) {
+          valid = false;
+        }
+      });
+      return valid;
+    });
+    return [...new Set(base.map((item) => item[excelKey]?.trim()).filter(Boolean))];
+  };
 
-  const availableLocalities = [
-    ...new Set(
-      data
-        .filter(
-          (item) =>
-            normalizeText(item.Categoría) === normalizeText(category) &&
-            (!selectedFilters.provincia || normalizeText(item.Provincia) === normalizeText(selectedFilters.provincia))
-        )
-        .map((item) => item.Localidad?.trim())
-    ),
-  ];
+  // Autocompleta todos los filtros en conjunto si sólo hay una opción válida para alguno
+  useEffect(() => {
+    const updatedFilters = { ...selectedFilters };
+    let changed = false;
+    // Para cada filtro (usamos las keys del mapping)
+    Object.entries(fieldMapping).forEach(([excelKey, stateKey]) => {
+      const options = getOptions(excelKey, updatedFilters);
+      if (options.length === 1 && !updatedFilters[stateKey]) {
+        updatedFilters[stateKey] = options[0];
+        changed = true;
+      }
+    });
+    if (changed) {
+      setSelectedFilters(updatedFilters);
+    }
+  }, [selectedFilters, data, category]);
+
+  // Actualiza los datos filtrados
+  useEffect(() => {
+    const filtered = getFilteredDataWithFilters();
+    setFilteredData(filtered);
+    setVisibleRows(INITIAL_ROWS);
+  }, [selectedFilters, data, category]);
+
+  // Si se borra (la X) un filtro, reinicia TODOS los filtros
+  const handleFilterChange = (field, value) => {
+    if (value === null) {
+      setSelectedFilters({
+        provincia: null,
+        localidad: null,
+        beneficio: null,
+        formaVenta: null,
+      });
+    } else {
+      setSelectedFilters((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    }
+  };
 
   const handleShowMore = () => {
     setVisibleRows((prev) => prev + INITIAL_ROWS);
   };
+
+  // Obtiene las opciones disponibles para cada filtro
+  const availableProvinces = getOptions("Provincia");
+  const availableLocalities = getOptions("Localidad");
+  const availableBeneficios = getOptions("beneficio");
+  const availableFormasVenta = getOptions("formaVenta");
 
   return (
     <div className="container">
       <h2>
         Descuentos en{" "}
         {currentCategory
-          ? currentCategory.replace(/-/g, " ").toLowerCase().replace(/^\w/, (c) => c.toUpperCase())
+          ? currentCategory
+              .replace(/-/g, " ")
+              .toLowerCase()
+              .replace(/^\w/, (c) => c.toUpperCase())
           : "Todas las categorías"}
       </h2>
 
@@ -145,6 +152,8 @@ const CardList = () => {
           value={selectedFilters.provincia}
           onChange={(event, newValue) => handleFilterChange("provincia", newValue)}
           renderInput={(params) => <TextField {...params} label="Provincia" />}
+          disableClearable={false}
+          isOptionEqualToValue={(option, value) => option === value}
         />
 
         <Autocomplete
@@ -152,18 +161,47 @@ const CardList = () => {
           value={selectedFilters.localidad}
           onChange={(event, newValue) => handleFilterChange("localidad", newValue)}
           renderInput={(params) => <TextField {...params} label="Localidad" />}
+          disableClearable={false}
+          isOptionEqualToValue={(option, value) => option === value}
+        />
+
+        <Autocomplete
+          options={availableBeneficios}
+          value={selectedFilters.beneficio}
+          onChange={(event, newValue) => handleFilterChange("beneficio", newValue)}
+          renderInput={(params) => <TextField {...params} label="Día de beneficio" />}
+          disableClearable={false}
+          isOptionEqualToValue={(option, value) => option === value}
+        />
+
+        <Autocomplete
+          options={availableFormasVenta}
+          value={selectedFilters.formaVenta}
+          onChange={(event, newValue) => handleFilterChange("formaVenta", newValue)}
+          renderInput={(params) => <TextField {...params} label="Forma de venta" />}
+          disableClearable={false}
+          isOptionEqualToValue={(option, value) => option === value}
         />
       </div>
 
       <div className="card-container">
         {filteredData.slice(0, visibleRows * CARDS_PER_ROW).map((local, index) => (
-          <a key={index} href={local.link} target="_blank" rel="noopener noreferrer" className="card">
+          <a
+            key={index}
+            href={local.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card"
+          >
             <img
               src={local.Imagen || "../Images/advertisment.jpg"}
               alt={local["Nombre Local"]}
               className="card-image"
             />
-            <Tooltip title={local.descuento ? `Descuento: ${local.descuento}%` : "Sin descuento"} arrow>
+            <Tooltip
+              title={local.descuento ? `Descuento: ${local.descuento}%` : "Sin descuento"}
+              arrow
+            >
               <div className="card-content">
                 <h3 className="card-title">{local["Nombre Local"]}</h3>
                 <p className="card-description">{local.descripcion}</p>

@@ -131,7 +131,6 @@ const cardVariants = {
       transition={{ duration: 1.5 }}
     >
       <div className="image-wrapper">
-        <img src="../advertisment.jpg" alt="Anuncio" />
       </div>
       {/* Contenedor de filtros con animación */}
       <motion.div 
