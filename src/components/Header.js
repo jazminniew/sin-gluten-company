@@ -49,8 +49,8 @@ export default function Header() {
           <BtnSolicita />
         </a>
       </div>
-
-      {/* Menú móvil */}
+ {/*
+ 
       <div className="lg:hidden">
         <button onClick={() => setMobileMenuOpen(true)} className="text-gray-700" aria-label="Abrir menú móvil">
           <Bars3Icon className="h-6 w-6" />
@@ -63,6 +63,8 @@ export default function Header() {
         onKeyDown={(e) => e.key === 'Escape' && setMobileMenuOpen(false)} 
         className="lg:hidden"
       >
+
+          Botón primario: Solicitar Tarjeta (ahora arriba)
       <DialogPanel className="fixed inset-0 bg-white p-6 z-50 overflow-y-auto rounded-3xl">
   <div className="flex justify-between items-center mb-8">
     <Link to="/" className="logo">
@@ -86,10 +88,10 @@ export default function Header() {
   </div>
 
   <div className="space-y-4">
-    {/* Sección de Acciones */}
+
     <div className="bg-gray-50 rounded-xl p-4 mb-6 shadow-sm">
       <div className="space-y-3">
-        {/* Botón primario: Solicitar Tarjeta (ahora arriba) */}
+
         <a
           href="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/"
           target="_blank"
@@ -111,7 +113,7 @@ export default function Header() {
             Solicitar Tarjeta
           </button>
         </a>
-        {/* Botón secundario: Adherí tu Comercio (ahora abajo) */}
+
         <Link to="/adherir" onClick={() => setMobileMenuOpen(false)}>
           <button
             className="w-full"
@@ -131,7 +133,6 @@ export default function Header() {
       </div>
     </div>
 
-    {/* Sección de Categorías (sin cambios) */}
     <div className="space-y-3">
       <h2 className="text-lg font-semibold text-gray-700 px-4">Categorías</h2>
       {menuItems.slice(1).map((item, index) => (
@@ -147,7 +148,9 @@ export default function Header() {
     </div>
   </div>
 </DialogPanel>
+
       </Dialog>
+      */}
     </header>
   );
 }
