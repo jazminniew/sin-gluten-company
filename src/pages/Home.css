@@ -653,6 +653,12 @@ text-decoration: underline;
   }
 }
 
+@media (min-width: 1500px) {
+.image-wrapper{
+  height:700px ;
+}
+}
+
 
 .info{
   display: flex;
