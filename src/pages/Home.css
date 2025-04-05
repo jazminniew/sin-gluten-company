@@ -645,3 +645,27 @@ text-decoration: underline;
     margin-top: 75px;
   }
 }
+
+@media (max-width: 768px) {
+  .suggestions-dropdown {
+    width: 50%; /* que ocupe casi todo el ancho del buscador */
+    left: 10%; /* centrado más o menos */
+  }
+}
+
+
+.info{
+  display: flex;
+  gap: 40px;
+  margin: 120px;
+}
+
+.card-wrapper{
+  max-width: 500px;
+}
+
+.card-home{
+  width: 300px!important;
+  background-color: #a81313;
+}
+

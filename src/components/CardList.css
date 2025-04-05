@@ -54,8 +54,13 @@
   text-align: left; 
 }
 
-.filtrosLocales{
-  max-width: 30%;
+.filtrosLocales {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: none;
 }
 
 .filtrosLocales .MuiAutocomplete-root {
@@ -95,3 +100,14 @@
 }
 
 
+@media (max-width: 1024px) {
+  .filtrosLocales {
+    grid-template-columns: repeat(2, 1fr); /* 2 y 2 */
+  }
+}
+
+@media (max-width: 600px) {
+  .filtrosLocales {
+    grid-template-columns: 1fr; /* uno abajo del otro */
+  }
+}
