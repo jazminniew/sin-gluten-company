@@ -11,6 +11,11 @@ import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
 import { motion } from "framer-motion";
+import publicidad1 from "../Images/publicidad1.jpg";
+import publicidad2 from "../Images/publicidad2.jpg";
+import publicidad3 from "../Images/publicidad3.jpg";
+import publicidad4 from "../Images/publicidad4.jpg";
+import publicidad5 from "../Images/publicidad5.jpg";
 
 const Home = () => {
   // Estados para manejar los datos, búsqueda y filtrado
@@ -22,7 +27,6 @@ const Home = () => {
   const [filteredResults, setFilteredResults] = useState([]); 
   const [suggestions, setSuggestions] = useState([]); 
   const [hasSearched, setHasSearched] = useState(false);
-  const [carouselImages, setCarouselImages] = useState([]);
 const [logoCarousel, setLogoCarousel] = useState([]);
 
 
@@ -37,8 +41,6 @@ const [logoCarousel, setLogoCarousel] = useState([]);
       const parsedData = XLSX.utils.sheet_to_json(sheet);
     
       setData(parsedData);
-      const carImages = parsedData.filter(item => item.carrouselImages).map(item => item.carrouselImages);
-setCarouselImages(carImages);
 const logoImages = parsedData.filter(item => item.logoCarrousel).map(item => item.logoCarrousel);
 setLogoCarousel(logoImages);
 
@@ -129,6 +131,13 @@ const cardVariants = {
   },
 };
 
+const carouselImages = [
+  publicidad1,
+    publicidad2,
+      publicidad3,
+        publicidad4,
+          publicidad5,
+];
 
   return (
     <div>
