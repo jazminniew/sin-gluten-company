@@ -35,6 +35,8 @@
   object-fit: cover;
   background-color: rgb(198, 198, 198);
   border-radius: 16px;
+    border: 2px solid rgb(217, 217, 217);
+
 }
 
 .card-content {

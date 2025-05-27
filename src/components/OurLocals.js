@@ -13,13 +13,21 @@ const OurLocals = () => {
         const workbook = XLSX.read(buffer, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const rawData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        const mappedData = rawData.filter(item => item.nombreLogo).map(item => ({
-          name: item.nombreLogo,
-          image: item.logoCircular,
-          link: item.linkLogo,
-        }));
-        
-        setLocalsData(mappedData);
+
+        // Filtrar y mapear datos válidos
+        const mappedData = rawData
+          .filter(item => item.nombreLogo)
+          .map(item => ({
+            name: item.nombreLogo,
+            image: item.logoCircular,
+            link: item.linkLogo,
+          }));
+
+        // Barajar y tomar 9 aleatorios
+        const shuffled = [...mappedData].sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 12);
+
+        setLocalsData(selected);
       });
   }, []);
 
