@@ -17,6 +17,16 @@ import publicidad3 from "../Images/publicidad3.jpg";
 import publicidad4 from "../Images/publicidad4.jpg";
 import publicidad5 from "../Images/publicidad5.jpg";
 
+const shuffleArray = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+
 const Home = () => {
   // Estados para manejar los datos, búsqueda y filtrado
   const [data, setData] = useState([]); 
@@ -30,6 +40,7 @@ const Home = () => {
 const [logoCarousel, setLogoCarousel] = useState([]);
 
 
+
   // Cargar datos desde el archivo Excel al montar el componente
   useEffect(() => {
     const fetchData = async () => {
@@ -41,8 +52,12 @@ const [logoCarousel, setLogoCarousel] = useState([]);
       const parsedData = XLSX.utils.sheet_to_json(sheet);
     
       setData(parsedData);
-const logoImages = parsedData.filter(item => item.logoCarrousel).map(item => item.logoCarrousel);
-setLogoCarousel(logoImages);
+const logoImages = parsedData
+        .filter(item => item.logoCarrousel)
+        .map(item => item.logoCarrousel);
+
+      // 3️⃣ Barajamos aquí y guardamos el estado
+      setLogoCarousel(shuffleArray(logoImages));
 
     
       // Obtener lista única de provincias

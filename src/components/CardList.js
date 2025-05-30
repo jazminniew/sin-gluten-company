@@ -49,11 +49,24 @@ const CardList = () => {
       });
   }, []);
 
+  const normalizedCategory = normalizeText(category);
   // Base filtrada por categoría
-  const getFilteredBase = () =>
-    data.filter(
-      (item) => normalizeText(item.Categoría) === normalizeText(category)
-    );
+const getFilteredBase = () => {
+  return data.filter(item => {
+    // Si no hay valor, lo ignoramos
+    if (!item.Categoría) return false;
+
+    // Partimos la cadena en trozos, 
+    // quitamos espacios y normalizamos para comparar
+    const cats = item.Categoría
+      .split(/[,;]/)               // separa por coma o punto y coma
+      .map(normalizeText)          // quita mayúsculas/espacios/acentos
+      .filter(Boolean);            // descartamos strings vacíos
+
+    // devolvemos true si alguna coincide con la categoría actual
+    return cats.includes(normalizedCategory);
+  });
+};
 
   // Filtra los datos aplicando TODOS los filtros (usando el mapping)
   const getFilteredDataWithFilters = () => {
