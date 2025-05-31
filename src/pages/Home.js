@@ -56,7 +56,7 @@ const logoImages = parsedData
         .filter(item => item.logoCarrousel)
         .map(item => item.logoCarrousel);
 
-      // 3️⃣ Barajamos aquí y guardamos el estado
+      // 3️Barajamos aquí y guardamos el estado
       setLogoCarousel(shuffleArray(logoImages));
 
     

@@ -15,14 +15,21 @@ export default function Suscribe() {
         <div className="container-button">
         <button 
           className="subscribe-btn" 
-          onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/", "_blank")}
+          onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613", "_blank")}
         >
           Suscripción mensual
         </button>
 
+                <button 
+          className="subscribe-btn" 
+          onClick={() => window.open("https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849198d2f501919f4979250295", "_blank")}
+        >
+          Suscripción mensual (por MP)
+        </button>
+
         <button 
           className="subscribe-btn" 
-          onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/", "_blank")}
+          onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/S9OI2GLCES8QDDDMIG", "_blank")}
         >
           Suscripción semestral
         </button>
