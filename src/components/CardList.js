@@ -94,13 +94,14 @@ const getOptions = (excelKey, filters = selectedFilters) => {
     let valid = true;
     Object.entries(fieldMapping).forEach(([key, stateKey]) => {
       if (key === excelKey) return;
-      if (filters[stateKey]) {
-  const raw = item[key] || "";
-  const partes = raw.split(/[,;]/).map(normalizeText);
-  if (!partes.includes(normalizeText(filters[stateKey]))) {
-    valid = false;
-  }
-}
+    if (filters[stateKey]) {
+      const raw = item[key] || "";
+      const partes = raw.split(/[,;]/).map(normalizeText);
+      if (!partes.includes(normalizeText(filters[stateKey]))) {
+        valid = false;
+      }
+    }
+
     });
     return valid;
   });
