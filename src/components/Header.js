@@ -21,7 +21,8 @@ export default function Header() {
     { label: 'Almacenes/Dietéticas/Distribuidoras', route: '/category/almacenes-dieteticas-distribuidoras' },
     { label: 'Heladerías', route: '/category/heladerias' },
     { label: 'POR EL MUNDO', route: '/category/por-el-mundo' },
-    { label: 'Hotelería', route: '/category/hoteleria' }
+    { label: 'Catering-Hotelería', route: '/category/catering-hoteleria' },
+
   ];  
 
   return (
