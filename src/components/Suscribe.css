@@ -111,3 +111,20 @@
       margin-left: 40px;
   }
   }
+
+    
+  .suscribe-buttons {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    gap: 10px; /* Espacio entre botones */
+    flex-direction: column;
+  }
+
+  .suscribe-buttons .subscribe-btn {
+  width: 100%;
+  text-align: center;
+}
+
+
+

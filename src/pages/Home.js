@@ -17,6 +17,8 @@ import publicidad3 from "../Images/publicidad3.jpg";
 import publicidad4 from "../Images/publicidad4.jpg";
 import publicidad5 from "../Images/publicidad5.jpg";
 
+
+
 const shuffleArray = (arr) => {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -36,6 +38,7 @@ const Home = () => {
   const [locations, setLocations] = useState([]); 
   const [filteredResults, setFilteredResults] = useState([]); 
   const [suggestions, setSuggestions] = useState([]); 
+  const [visibleCount, setVisibleCount] = useState(8);
   const [hasSearched, setHasSearched] = useState(false);
 const [logoCarousel, setLogoCarousel] = useState([]);
 
@@ -50,6 +53,14 @@ const [logoCarousel, setLogoCarousel] = useState([]);
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const parsedData = XLSX.utils.sheet_to_json(sheet);
+
+      // Justo después de `const parsedData = XLSX.utils.sheet_to_json(sheet);`
+const normalizedData = parsedData.map(item => ({
+  ...item,
+  descripcion: item.Descripción || item.descripcion || "",
+}));
+setData(normalizedData);
+
     
       setData(parsedData);
 const logoImages = parsedData
@@ -102,6 +113,8 @@ const logoImages = parsedData
     }
     
     setFilteredResults(results); 
+    setVisibleCount(8);
+
     setHasSearched(true);
   };
   
@@ -228,24 +241,40 @@ const carouselImages = [
   
       {/* Resultados de búsqueda */}
       <div className="results-container">
-        {filteredResults.length === 0 && hasSearched ? (
-          <p>No se encontraron resultados.</p>
-        ) : (
-          filteredResults.map((item, index) => (
-            <div key={index} className="card">
-              <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
-              <h3>{item["Nombre Local"]}</h3>
-              <p>{item.Descripción}</p>
-              <div className="ver-mas-container">
-                {item.link && (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="ver-mas-link">
-                    Ver más
-                  </a>
-                )}
-              </div>
-            </div>
-          ))
-        )}
+
+
+  {filteredResults.slice(0, visibleCount).map((item, index) => (
+  <div key={index} className="card card-result">
+    <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
+    <h3>{item["Nombre Local"]}</h3>
+    <p>{item.descripcion}</p>
+
+    <div className="ver-mas-container">
+      {item.link && (
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ver-mas-link"
+        >
+          Ver más
+        </a>
+      )}
+    </div>
+  </div>
+))}
+
+{visibleCount < filteredResults.length && (
+  <div style={{ textAlign: "center", marginTop: "20px" }}>
+    <button
+      className="search-button"
+      onClick={() => setVisibleCount(visibleCount + 8)}
+    >
+      Ver más locales
+    </button>
+  </div>
+)}
+
       </div>
   
       {/* Carrusel de promociones */}
@@ -256,7 +285,7 @@ const carouselImages = [
   centeredSlides={true}
   slidesPerView="auto"
   loop={carouselImages.length > 5}
-  autoplay={{ delay: 3000, disableOnInteraction: false }}
+  autoplay={{ delay: 10000, disableOnInteraction: false }}
   coverflowEffect={{ rotate: 0, stretch: 0, depth: 200, modifier: 3, slideShadows: false }}
   modules={[EffectCoverflow, Autoplay]}
   className="mySwiper"
@@ -271,7 +300,7 @@ const carouselImages = [
       {/* Tarjetas de información */}
       <div className="info-cards">
       {[
-        { title: "Cerca mío", iconSrc: "/ionicons/location-outline.svg", link: "https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i" },
+        { title: "Beneficios cerca de mío", iconSrc: "/ionicons/location-outline.svg", link: "https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i" },
         { title: "Suscribite", iconSrc: "/ionicons/mail-outline.svg", link: "https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" },
         { title: "Adherí tu comercio", iconSrc: "/ionicons/storefront-outline.svg", link: "/adherir" },
       ].map((item, index) => (
@@ -285,7 +314,7 @@ const carouselImages = [
         viewport={{ once: true, amount: 0.1 }}
         onViewportEnter={() => console.log(`Tarjeta ${index} visible`)}
       >
-        <Card title={item.title} iconSrc={item.iconSrc} buttonText="Ver más" link={item.link} />
+        <Card class="card-result" title={item.title} iconSrc={item.iconSrc} buttonText="Ver más" link={item.link} />
       </motion.div>
       
       ))}

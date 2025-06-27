@@ -196,7 +196,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columnas en una fila */
   gap: 40px; 
-  max-width: 900px;
+  max-width: 600px;
   margin: 40px auto;
   align-items: center;
   justify-content: center;
@@ -214,6 +214,8 @@
 .card:hover {
     transform: scale(1.05); /* Efecto hover */
 }
+
+
 
 /* Media querys*/
 @media (max-width: 768px) {
@@ -676,4 +678,62 @@ text-decoration: underline;
 }
 
 
+.ver-mas-link {
+  color: #00a8b5;
+  text-decoration: none;
+  display: inline-block; 
+  text-align: center;    
+  font-size: 16px;       
+  margin-top: 10px;     
+  font-weight: 500;     
+}
 
+.card-result {
+  min-height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  margin: 100px auto;
+  place-items: center; /* 👈 centra cada tarjeta dentro de su celda */
+}
+
+.info-cards-card {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  max-width: 350px;  /* 👈 ancho máximo real */
+}
+
+.info-cards-card:hover {
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .card-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr; /* una tarjeta por fila */
+  }
+}
+
+/* Responsive: results-container en móviles */
+@media (max-width: 480px) {
+  .results-container {
+    grid-template-columns: 1fr; /* 1 columna */
+    gap: 20px; /* separadas verticalmente */
+    width: 100%; /* ocupar todo el ancho */
+  }
+}
