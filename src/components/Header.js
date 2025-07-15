@@ -46,9 +46,15 @@ export default function Header() {
         </Link>
 
         {/* Botón de UIVERSE reemplazando el anterior */}
-        <a href="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" target="_blank" rel="noopener noreferrer">
-          <BtnSolicita />
-        </a>
+<button onClick={() => {
+  const section = document.getElementById("suscribe-section");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}}>
+  <BtnSolicita />
+</button>
+
       </div>
  {/*
  

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect, useRef  } from "react"; 
 import "./Home.css";
 import Filter from "../components/Filter";
 import Suscribe from "../components/Suscribe";
@@ -41,6 +41,8 @@ const Home = () => {
   const [visibleCount, setVisibleCount] = useState(8);
   const [hasSearched, setHasSearched] = useState(false);
 const [logoCarousel, setLogoCarousel] = useState([]);
+const suscribeRef = useRef(null); // referencia para scrollear
+
 
 
 
@@ -346,8 +348,9 @@ const carouselImages = [
 </div>
 
     </motion.div>
-
+<div id="suscribe-section">
     <Suscribe/>
+    </div>
     </div>
   );
   
