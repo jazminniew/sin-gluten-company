@@ -70,14 +70,21 @@ const logoImages = parsedData
       // 3️Barajamos aquí y guardamos el estado
       setLogoCarousel(shuffleArray(logoImages));
 
-    
-      // Obtener lista única de provincias
-      const uniqueProvinces = [...new Set(parsedData.map((item) => item.Provincia))];
-      setLocations(uniqueProvinces);
-    };
-    
-    fetchData();
-  }, []); 
+    // Obtener lista única de provincias
+   // Obtener lista única de provincias, excluyendo valores no deseados
+const uniqueProvinces = [...new Set(
+  parsedData
+    .map((item) => item.Provincia)
+    .filter((prov) =>
+      prov &&
+      !["POR EL MUNDO", "Heladerías", "Envíos a todo el país", "Hotelería", "Almacenes-Dietéticas-Distribuidoras", "Viandas-Comidas Congeladas, Catering-Hotelería", "Restaurantes-Cafeterías", "Panaderías-Pastelerías-Chocolaterías", "Pizza-Empanadas-Pastas"].includes(prov)
+    )
+)];
+setLocations(uniqueProvinces);
+ };
+  
+      fetchData();
+    }, []);
 
   // Cerrar el dropdown si se hace clic fuera de la búsqueda
   useEffect(() => {
@@ -102,21 +109,26 @@ const logoImages = parsedData
   
   // Buscar locales por nombre y provincia
   const handleSearch = () => {
-    if (search.trim() === "") return;
-      
-    let results = data.filter((item) => 
-      item["Nombre Local"] && item["Nombre Local"].toLowerCase().includes(search.toLowerCase())
-    );
-  
-    if (location && location !== "Provincia (Opcional)") {
-      results = results.filter((item) => item.Provincia && item.Provincia === location);
-    }
-    
-    setFilteredResults(results); 
-    setVisibleCount(8);
+  let results = data;
 
-    setHasSearched(true);
-  };
+  // Si hay algo en el campo de búsqueda, filtra por nombre
+  if (search.trim() !== "") {
+    results = results.filter((item) => 
+      item["Nombre Local"] &&
+      item["Nombre Local"].toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
+  // Si hay una provincia seleccionada (y no es el placeholder), filtrá también por provincia
+  if (location && location !== "Provincia (Opcional)") {
+    results = results.filter((item) => item.Provincia && item.Provincia === location);
+  }
+
+  setFilteredResults(results);
+  setVisibleCount(8);
+  setHasSearched(true);
+};
+
   
   // Ejecutar búsqueda al presionar Enter
   const handleKeyDown = (e) => {
@@ -242,8 +254,7 @@ const carouselImages = [
       {/* Resultados de búsqueda */}
       <div className="results-container">
 
-
-  {filteredResults.slice(0, visibleCount).map((item, index) => (
+{filteredResults.slice(0, visibleCount).map((item, index) => (
   <div key={index} className="card card-result">
     <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
     <h3>{item["Nombre Local"]}</h3>
@@ -263,6 +274,13 @@ const carouselImages = [
     </div>
   </div>
 ))}
+
+{/* Mostrar mensaje si no hay resultados */}
+{hasSearched && filteredResults.length === 0 && (
+  <div style={{ textAlign: "center",justifyContent:"center", marginTop: "30px", color: "#000", width: "400px", height:"100px", padding:"20px", backgroundColor:"#ffcdcd", borderRadius:"10px" }}>
+    No se encontró "{search}" en {location !== "Provincia (Opcional)" ? location : "ninguna provincia"}
+  </div>
+)}
 
 {visibleCount < filteredResults.length && (
   <div style={{ textAlign: "center", marginTop: "20px" }}>

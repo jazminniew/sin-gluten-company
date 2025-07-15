@@ -94,8 +94,10 @@
     background: #006064;
   }
   .form-input {
-    margin-bottom: 10px !important; /* Ajusta el valor según el espacio deseado */
+    margin-bottom: 10px !important; 
   }
+
+
   
 .title{
   font-size: 2.25rem ;
