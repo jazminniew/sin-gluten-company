@@ -31,8 +31,8 @@
 .card-image {
   width: 100%;
   height: 140px;
-  object-fit: cover;
-  background-color: rgb(198, 198, 198);
+  object-fit: contain;
+  background-color: #088696;
   border-radius: 16px;
     border: 2px solid rgb(217, 217, 217);
 
