@@ -726,6 +726,7 @@ text-decoration: underline;
 
   .info-cards {
     grid-template-columns: 1fr; /* una tarjeta por fila */
+    margin-left: -20px;
   }
 }
 
