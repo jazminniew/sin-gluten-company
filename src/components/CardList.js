@@ -269,7 +269,7 @@ const getOptions = (excelKey, filters = selectedFilters) => {
 
       </div>
 
-      <div className="card-container">
+      <div className="card-container cardlist-grid">
         {filteredData.slice(0, visibleRows * CARDS_PER_ROW).map((local, index) => (
           <a
             key={index}
