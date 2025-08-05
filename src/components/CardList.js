@@ -167,10 +167,10 @@ const getOptions = (excelKey, filters = selectedFilters) => {
   };
 
   // Obtiene las opciones disponibles para cada filtro
-  const availableProvinces = getOptions("Provincia");
-  const availableLocalities = getOptions("Localidad");
+  const availableProvinces = getOptions("Provincia").sort();
+  const availableLocalities = getOptions("Localidad").sort();
   const availableBeneficios = getOptions("beneficio");
-  const availableFormasVenta = getOptions("formaVenta");
+  const availableFormasVenta = getOptions("formaVenta").sort();
 
   return (
     <div className="container">
