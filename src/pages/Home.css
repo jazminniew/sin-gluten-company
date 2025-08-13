@@ -738,3 +738,49 @@ text-decoration: underline;
     width: 100%; /* ocupar todo el ancho */
   }
 }
+/* --- Base (desktop/tablet) --- */
+.search-input { display: flex; }
+.search-location { display: flex; }
+
+/* --- Mobile ≤768px: ocultar input, mostrar provincia --- */
+@media (max-width: 768px) {
+  .search-box {
+    width: 90%;
+    gap: 0;
+  }
+
+  /* OCULTA el input de texto */
+  .search-input {
+    display: none !important;
+    border-right: none;
+  }
+
+  /* MUESTRA el selector de provincia y que ocupe el ancho */
+  .search-location {
+    display: flex !important;
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 10px 15px;
+    justify-content: space-between;
+    border-right: none;
+  }
+
+  /* El dropdown que salga full-width debajo */
+  .search-location .dropdown {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  /* Fuera el dropdown de sugerencias si no hay input visible */
+  .suggestions-dropdown {
+    display: none !important;
+  }
+}
+
+/* Mobile chico ≤480px (opcional, por prolijidad) */
+@media (max-width: 480px) {
+  .search-box { width: 100%; }
+  .search-location span { font-size: 14px; }
+}
