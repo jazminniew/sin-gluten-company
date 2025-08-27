@@ -81,8 +81,10 @@ const uniqueProvinces = [...new Set(
       prov &&
       !["POR EL MUNDO", "Heladerías", "Envíos a todo el país", "Hotelería", "Almacenes-Dietéticas-Distribuidoras", "Viandas-Comidas Congeladas, Catering-Hotelería", "Restaurantes-Cafeterías", "Panaderías-Pastelerías-Chocolaterías", "Pizza-Empanadas-Pastas"].includes(prov)
     )
-)];
+)].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" })); // ordena alfabéticamente según idioma español
+
 setLocations(uniqueProvinces);
+
  };
   
       fetchData();

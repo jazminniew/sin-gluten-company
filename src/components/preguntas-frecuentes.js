@@ -36,7 +36,7 @@ export default function PreguntasFrecuentes() {
     {
       id: "item-3",
       question: "¿Cuánto sale?",
-      answer: "La suscripción tiene un valor de $3200 por mes. En el caso de grupo familiar directo, ofrecemos un descuento por adicional del 50%.",
+      answer: "La suscripción tiene un valor de $3800 por mes. En el caso de grupo familiar directo, ofrecemos un descuento por adicional del 50%.",
       icon: <DollarSign className="icon" />,
     },
     {
