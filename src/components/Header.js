@@ -21,7 +21,8 @@ export default function Header() {
     { label: 'Almacenes/Dietéticas/Distribuidoras', route: '/category/almacenes-dieteticas-distribuidoras' },
     { label: 'Heladerías', route: '/category/heladerias' },
     { label: 'POR EL MUNDO', route: '/category/por-el-mundo' },
-    { label: 'Hotelería', route: '/category/hoteleria' }
+    { label: 'Catering-Hotelería', route: '/category/catering-hoteleria' },
+
   ];  
 
   return (
@@ -45,9 +46,15 @@ export default function Header() {
         </Link>
 
         {/* Botón de UIVERSE reemplazando el anterior */}
-        <a href="https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" target="_blank" rel="noopener noreferrer">
-          <BtnSolicita />
-        </a>
+<button onClick={() => {
+  const section = document.getElementById("suscribe-section");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+}}>
+  <BtnSolicita />
+</button>
+
       </div>
  {/*
  

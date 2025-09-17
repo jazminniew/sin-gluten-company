@@ -94,8 +94,10 @@
     background: #006064;
   }
   .form-input {
-    margin-bottom: 10px !important; /* Ajusta el valor según el espacio deseado */
+    margin-bottom: 10px !important; 
   }
+
+
   
 .title{
   font-size: 2.25rem ;
@@ -122,4 +124,33 @@
     width: 100%;
     height: 100%;
     background-color: #333;
+}
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    max-height: none;   /* deja que crezca */
+  }
+
+  .contact-info {
+    width: 100%;
+    text-align: left;   /* 🔑 alinea a la izquierda */
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .contact-item {
+    justify-content: flex-start;  /* 🔑 íconos + texto alineados a la izq */
+    flex-wrap: wrap;
+    text-align: left;
+  }
+
+  .contact-item span {
+    display: inline; /* sigue en línea, se corta solo si hace falta */
+    margin-top: 0;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-height: none; /* 🔑 quita límite que lo recortaba */
+  }
 }

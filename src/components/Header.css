@@ -73,10 +73,60 @@ header .container-button {
   margin-bottom: 5px; 
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   header .container-button {
     display: none;
   }
+} */
+/* Versión mobile: columna + ancho máximo */
+@media (max-width: 768px) {
+  header .container-button {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    row-gap: 12px; /* separación vertical entre botones */
+  }
+
+  header .container-button button,
+  header .container-button a {
+    display: inline-block;
+    min-width: 180px;   /* más chico */
+    max-width: 180px;   /* más chico */
+    width: 100%;
+    text-align: center;
+  }
+
+    header .container-button button,
+  header .container-button a {
+    width: 160px; /* ancho fijo para todos */
+    text-align: center;
+  }
+
 }
 
+@media (max-width: 768px) {
+  header .container-button {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px; /* 👈 aumenta separación con logo/texto */
+    row-gap: 12px;
+  }
 
+  header .container-button button,
+  header .container-button a {
+    min-width: 160px;
+    max-width: 160px;
+    width: 100%;
+    text-align: center;
+  }
+
+  header .atc-button {
+    background-color: #e0e0e0;
+  }
+
+  header .logo {
+    display: none;
+  }
+}

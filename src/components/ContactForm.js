@@ -60,7 +60,7 @@ const ContactForm = () => {
     Object.values(form).every((field) => field.trim() !== "");
 
   return (
-    <div className="form-container">
+    <div className="form-container-contactForm">
       <form className="form" onSubmit={handleSubmit}>
         <TextField id="name" label="Nombre del Local" fullWidth value={form.name} onChange={handleChange} error={errors.name} helperText={errors.name ? "El nombre no puede estar vacío" : ""} />
         <TextField id="whatsapp" label="Teléfono" fullWidth value={form.whatsapp} onChange={handleChange} error={errors.whatsapp} helperText={errors.whatsapp ? "Debe ser un número entre 10 y 15 dígitos" : ""} />

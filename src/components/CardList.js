@@ -49,39 +49,77 @@ const CardList = () => {
       });
   }, []);
 
+  const normalizedCategory = normalizeText(category);
   // Base filtrada por categoría
-  const getFilteredBase = () =>
-    data.filter(
-      (item) => normalizeText(item.Categoría) === normalizeText(category)
-    );
+const getFilteredBase = () => {
+  return data.filter(item => {
+    // Si no hay valor, lo ignoramos
+    if (!item.Categoría) return false;
+
+    // Partimos la cadena en trozos, 
+    // quitamos espacios y normalizamos para comparar
+    const cats = item.Categoría
+      .split(/[,;]/)               // separa por coma o punto y coma
+      .map(normalizeText)          // quita mayúsculas/espacios/acentos
+      .filter(Boolean);            // descartamos strings vacíos
+
+    // devolvemos true si alguna coincide con la categoría actual
+    return cats.includes(normalizedCategory);
+  });
+};
 
   // Filtra los datos aplicando TODOS los filtros (usando el mapping)
-  const getFilteredDataWithFilters = () => {
-    return getFilteredBase().filter((item) =>
-      Object.entries(fieldMapping).every(([excelKey, stateKey]) => {
-        return (
-          !selectedFilters[stateKey] ||
-          normalizeText(item[excelKey]) === normalizeText(selectedFilters[stateKey])
-        );
-      })
-    );
-  };
+const getFilteredDataWithFilters = () =>
+  getFilteredBase().filter(item =>
+    Object.entries(fieldMapping).every(([excelKey, stateKey]) => {
+      const selected = selectedFilters[stateKey];
+      if (!selected) return true;
+
+      const raw = item[excelKey] || "";
+      // si alguna de las partes coincide, devolvemos true
+      return raw
+        .split(/[,;]/)
+        .map(normalizeText)
+        .includes(normalizeText(selected));
+    })
+  );
+
 
   // Devuelve las opciones disponibles para un filtro dado (ej. "Provincia") según los otros filtros ya aplicados
-  const getOptions = (excelKey, filters = selectedFilters) => {
-    const base = getFilteredBase().filter((item) => {
-      let valid = true;
-      // Recorre todos los filtros menos el que estamos generando opciones
-      Object.entries(fieldMapping).forEach(([key, stateKey]) => {
-        if (key === excelKey) return;
-        if (filters[stateKey] && normalizeText(item[key]) !== normalizeText(filters[stateKey])) {
-          valid = false;
-        }
-      });
-      return valid;
+// Antes:
+// Después:
+const getOptions = (excelKey, filters = selectedFilters) => {
+  const base = getFilteredBase().filter(item => {
+    // la misma lógica de antes para “base”
+    let valid = true;
+    Object.entries(fieldMapping).forEach(([key, stateKey]) => {
+      if (key === excelKey) return;
+    if (filters[stateKey]) {
+      const raw = item[key] || "";
+      const partes = raw.split(/[,;]/).map(normalizeText);
+      if (!partes.includes(normalizeText(filters[stateKey]))) {
+        valid = false;
+      }
+    }
+
     });
-    return [...new Set(base.map((item) => item[excelKey]?.trim()).filter(Boolean))];
-  };
+    return valid;
+  });
+
+  // aquí partimos cada celda, aplanamos y sacamos duplicados
+  const setOpciones = new Set();
+  base.forEach(item => {
+    const raw = item[excelKey] || "";
+    raw
+      .split(/[,;]/)             // separa por coma o ;
+      .map(s => s.trim())        // quita espacios al inicio/final
+      .filter(Boolean)           // saca cadenas vacías
+      .forEach(s => setOpciones.add(s));
+  });
+
+  return Array.from(setOpciones);
+};
+
 
   // Autocompleta todos los filtros en conjunto si sólo hay una opción válida para alguno
   useEffect(() => {
@@ -129,10 +167,10 @@ const CardList = () => {
   };
 
   // Obtiene las opciones disponibles para cada filtro
-  const availableProvinces = getOptions("Provincia");
-  const availableLocalities = getOptions("Localidad");
+  const availableProvinces = getOptions("Provincia").sort();
+  const availableLocalities = getOptions("Localidad").sort();
   const availableBeneficios = getOptions("beneficio");
-  const availableFormasVenta = getOptions("formaVenta");
+  const availableFormasVenta = getOptions("formaVenta").sort();
 
   return (
     <div className="container">
@@ -150,41 +188,88 @@ const CardList = () => {
         <Autocomplete
           options={availableProvinces}
           value={selectedFilters.provincia}
-          onChange={(event, newValue) => handleFilterChange("provincia", newValue)}
+          onChange={(event, newValue) =>
+            handleFilterChange("provincia", newValue)
+          }
           renderInput={(params) => <TextField {...params} label="Provincia" />}
           disableClearable={false}
           isOptionEqualToValue={(option, value) => option === value}
+
+          /* ─── FORZAR SIEMPRE HACIA ABAJO ─── */
+          disablePortal
+          PopperProps={{
+            modifiers: [
+              { name: "flip", enabled: false } // desactiva flip
+            ],
+            popperOptions: {
+              placement: "bottom-start",     // fuerza abajo-izquierda
+            },
+          }}
         />
 
         <Autocomplete
           options={availableLocalities}
           value={selectedFilters.localidad}
-          onChange={(event, newValue) => handleFilterChange("localidad", newValue)}
+          onChange={(event, newValue) =>
+            handleFilterChange("localidad", newValue)
+          }
           renderInput={(params) => <TextField {...params} label="Localidad" />}
           disableClearable={false}
           isOptionEqualToValue={(option, value) => option === value}
+
+          /* ─── FORZAR SIEMPRE HACIA ABAJO ─── */
+          disablePortal
+          PopperProps={{
+            modifiers: [{ name: "flip", enabled: false }],
+            popperOptions: { placement: "bottom-start" },
+          }}
         />
+
 
         <Autocomplete
           options={availableBeneficios}
           value={selectedFilters.beneficio}
-          onChange={(event, newValue) => handleFilterChange("beneficio", newValue)}
-          renderInput={(params) => <TextField {...params} label="Día de beneficio" />}
+          onChange={(event, newValue) =>
+            handleFilterChange("beneficio", newValue)
+          }
+          renderInput={(params) => (
+            <TextField {...params} label="Día de beneficio" />
+          )}
           disableClearable={false}
           isOptionEqualToValue={(option, value) => option === value}
+
+          /* ─── FORZAR SIEMPRE HACIA ABAJO ─── */
+          disablePortal
+          PopperProps={{
+            modifiers: [{ name: "flip", enabled: false }],
+            popperOptions: { placement: "bottom-start" },
+          }}
         />
+
 
         <Autocomplete
           options={availableFormasVenta}
           value={selectedFilters.formaVenta}
-          onChange={(event, newValue) => handleFilterChange("formaVenta", newValue)}
-          renderInput={(params) => <TextField {...params} label="Forma de venta" />}
+          onChange={(event, newValue) =>
+            handleFilterChange("formaVenta", newValue)
+          }
+          renderInput={(params) => (
+            <TextField {...params} label="Forma de venta" />
+          )}
           disableClearable={false}
           isOptionEqualToValue={(option, value) => option === value}
+
+          /* ─── FORZAR SIEMPRE HACIA ABAJO ─── */
+          disablePortal
+          PopperProps={{
+            modifiers: [{ name: "flip", enabled: false }],
+            popperOptions: { placement: "bottom-start" },
+          }}
         />
+
       </div>
 
-      <div className="card-container">
+      <div className="card-container cardlist-grid">
         {filteredData.slice(0, visibleRows * CARDS_PER_ROW).map((local, index) => (
           <a
             key={index}

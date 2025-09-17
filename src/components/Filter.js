@@ -21,7 +21,8 @@ const Filter = () => {
     { name: "Almacenes-Dietéticas-Distribuidoras", iconSrc: "/ionicons/storefront-outline.svg" },
     { name: "Heladerías", iconSrc: "/ionicons/ice-cream-outline.svg" },
     { name: "POR EL MUNDO", iconSrc: "/ionicons/globe-outline.svg" },
-    { name: "Hotelería", iconSrc: "/ionicons/bed-outline.svg" },
+    { name: "Catering-Hotelería", iconSrc: "/ionicons/bed-outline.svg" },
+
   ];
 
   useEffect(() => {

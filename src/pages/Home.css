@@ -196,7 +196,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columnas en una fila */
   gap: 40px; 
-  max-width: 900px;
+  max-width: 600px;
   margin: 40px auto;
   align-items: center;
   justify-content: center;
@@ -214,6 +214,8 @@
 .card:hover {
     transform: scale(1.05); /* Efecto hover */
 }
+
+
 
 /* Media querys*/
 @media (max-width: 768px) {
@@ -675,3 +677,110 @@ text-decoration: underline;
   background-color: #a81313;
 }
 
+
+.ver-mas-link {
+  color: #00a8b5;
+  text-decoration: none;
+  display: inline-block; 
+  text-align: center;    
+  font-size: 16px;       
+  margin-top: 10px;     
+  font-weight: 500;     
+}
+
+.card-result {
+  min-height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  margin: 100px auto;
+  place-items: center; /* 👈 centra cada tarjeta dentro de su celda */
+}
+
+.info-cards-card {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  max-width: 350px;  /* 👈 ancho máximo real */
+}
+
+.info-cards-card:hover {
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .card-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr; /* una tarjeta por fila */
+    margin-left: -20px;
+  }
+}
+
+/* Responsive: results-container en móviles */
+@media (max-width: 480px) {
+  .results-container {
+    grid-template-columns: 1fr; /* 1 columna */
+    gap: 20px; /* separadas verticalmente */
+    width: 100%; /* ocupar todo el ancho */
+  }
+}
+/* --- Base (desktop/tablet) --- */
+.search-input { display: flex; }
+.search-location { display: flex; }
+
+/* --- Mobile ≤768px: ocultar input, mostrar provincia --- */
+@media (max-width: 768px) {
+  .search-box {
+    width: 90%;
+    gap: 0;
+  }
+
+  /* OCULTA el input de texto */
+  .search-input {
+    display: none !important;
+    border-right: none;
+  }
+
+  /* MUESTRA el selector de provincia y que ocupe el ancho */
+  .search-location {
+    display: flex !important;
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 10px 15px;
+    justify-content: space-between;
+    border-right: none;
+  }
+
+  /* El dropdown que salga full-width debajo */
+  .search-location .dropdown {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  /* Fuera el dropdown de sugerencias si no hay input visible */
+  .suggestions-dropdown {
+    display: none !important;
+  }
+}
+
+/* Mobile chico ≤480px (opcional, por prolijidad) */
+@media (max-width: 480px) {
+  .search-box { width: 100%; }
+  .search-location span { font-size: 14px; }
+}

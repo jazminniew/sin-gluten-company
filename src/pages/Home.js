@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect, useRef  } from "react"; 
 import "./Home.css";
 import Filter from "../components/Filter";
 import Suscribe from "../components/Suscribe";
@@ -11,6 +11,23 @@ import { EffectCoverflow, Autoplay } from "swiper/modules";
 import logo from "../Images/logo.png"; 
 import * as XLSX from "xlsx";
 import { motion } from "framer-motion";
+import publicidad1 from "../Images/publicidad1.jpg";
+import publicidad2 from "../Images/publicidad2.jpg";
+import publicidad3 from "../Images/publicidad3.jpg";
+import publicidad4 from "../Images/publicidad4.jpg";
+import publicidad5 from "../Images/publicidad5.jpg";
+
+
+
+const shuffleArray = (arr) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
 
 const Home = () => {
   // Estados para manejar los datos, búsqueda y filtrado
@@ -21,9 +38,12 @@ const Home = () => {
   const [locations, setLocations] = useState([]); 
   const [filteredResults, setFilteredResults] = useState([]); 
   const [suggestions, setSuggestions] = useState([]); 
+  const [visibleCount, setVisibleCount] = useState(8);
   const [hasSearched, setHasSearched] = useState(false);
-  const [carouselImages, setCarouselImages] = useState([]);
 const [logoCarousel, setLogoCarousel] = useState([]);
+const suscribeRef = useRef(null); // referencia para scrollear
+
+
 
 
   // Cargar datos desde el archivo Excel al montar el componente
@@ -35,21 +55,40 @@ const [logoCarousel, setLogoCarousel] = useState([]);
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const parsedData = XLSX.utils.sheet_to_json(sheet);
-    
-      setData(parsedData);
-      const carImages = parsedData.filter(item => item.carrouselImages).map(item => item.carrouselImages);
-setCarouselImages(carImages);
-const logoImages = parsedData.filter(item => item.logoCarrousel).map(item => item.logoCarrousel);
-setLogoCarousel(logoImages);
+
+      // Justo después de `const parsedData = XLSX.utils.sheet_to_json(sheet);`
+const normalizedData = parsedData.map(item => ({
+  ...item,
+  descripcion: item.Descripción || item.descripcion || "",
+}));
+setData(normalizedData);
 
     
-      // Obtener lista única de provincias
-      const uniqueProvinces = [...new Set(parsedData.map((item) => item.Provincia))];
-      setLocations(uniqueProvinces);
-    };
-    
-    fetchData();
-  }, []); 
+      setData(parsedData);
+const logoImages = parsedData
+        .filter(item => item.logoCarrousel)
+        .map(item => item.logoCarrousel);
+
+      // 3️Barajamos aquí y guardamos el estado
+      setLogoCarousel(shuffleArray(logoImages));
+
+    // Obtener lista única de provincias
+   // Obtener lista única de provincias, excluyendo valores no deseados
+const uniqueProvinces = [...new Set(
+  parsedData
+    .map((item) => item.Provincia)
+    .filter((prov) =>
+      prov &&
+      !["POR EL MUNDO", "Heladerías", "Envíos a todo el país", "Hotelería", "Almacenes-Dietéticas-Distribuidoras", "Viandas-Comidas Congeladas, Catering-Hotelería", "Restaurantes-Cafeterías", "Panaderías-Pastelerías-Chocolaterías", "Pizza-Empanadas-Pastas"].includes(prov)
+    )
+)].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" })); // ordena alfabéticamente según idioma español
+
+setLocations(uniqueProvinces);
+
+ };
+  
+      fetchData();
+    }, []);
 
   // Cerrar el dropdown si se hace clic fuera de la búsqueda
   useEffect(() => {
@@ -74,19 +113,26 @@ setLogoCarousel(logoImages);
   
   // Buscar locales por nombre y provincia
   const handleSearch = () => {
-    if (search.trim() === "") return;
-      
-    let results = data.filter((item) => 
-      item["Nombre Local"] && item["Nombre Local"].toLowerCase().includes(search.toLowerCase())
+  let results = data;
+
+  // Si hay algo en el campo de búsqueda, filtra por nombre
+  if (search.trim() !== "") {
+    results = results.filter((item) => 
+      item["Nombre Local"] &&
+      item["Nombre Local"].toLowerCase().includes(search.toLowerCase())
     );
-  
-    if (location && location !== "Provincia (Opcional)") {
-      results = results.filter((item) => item.Provincia && item.Provincia === location);
-    }
-    
-    setFilteredResults(results); 
-    setHasSearched(true);
-  };
+  }
+
+  // Si hay una provincia seleccionada (y no es el placeholder), filtrá también por provincia
+  if (location && location !== "Provincia (Opcional)") {
+    results = results.filter((item) => item.Provincia && item.Provincia === location);
+  }
+
+  setFilteredResults(results);
+  setVisibleCount(8);
+  setHasSearched(true);
+};
+
   
   // Ejecutar búsqueda al presionar Enter
   const handleKeyDown = (e) => {
@@ -129,6 +175,13 @@ const cardVariants = {
   },
 };
 
+const carouselImages = [
+  publicidad1,
+    publicidad2,
+      publicidad3,
+        publicidad4,
+          publicidad5,
+];
 
   return (
     <div>
@@ -204,24 +257,46 @@ const cardVariants = {
   
       {/* Resultados de búsqueda */}
       <div className="results-container">
-        {filteredResults.length === 0 && hasSearched ? (
-          <p>No se encontraron resultados.</p>
-        ) : (
-          filteredResults.map((item, index) => (
-            <div key={index} className="card">
-              <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
-              <h3>{item["Nombre Local"]}</h3>
-              <p>{item.Descripción}</p>
-              <div className="ver-mas-container">
-                {item.link && (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="ver-mas-link">
-                    Ver más
-                  </a>
-                )}
-              </div>
-            </div>
-          ))
-        )}
+
+{filteredResults.slice(0, visibleCount).map((item, index) => (
+  <div key={index} className="card card-result">
+    <img src={item.Imagen} alt={item["Nombre Local"]} className="card-image" />
+    <h3>{item["Nombre Local"]}</h3>
+    <p>{item.descripcion}</p>
+
+    <div className="ver-mas-container">
+      {item.link && (
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ver-mas-link"
+        >
+          Ver más
+        </a>
+      )}
+    </div>
+  </div>
+))}
+
+{/* Mostrar mensaje si no hay resultados */}
+{hasSearched && filteredResults.length === 0 && (
+  <div style={{ textAlign: "center",justifyContent:"center", marginTop: "30px", color: "#000", width: "400px", height:"100px", padding:"20px", backgroundColor:"#ffcdcd", borderRadius:"10px" }}>
+    No se encontró "{search}" en {location !== "Provincia (Opcional)" ? location : "ninguna provincia"}
+  </div>
+)}
+
+{visibleCount < filteredResults.length && (
+  <div style={{ textAlign: "center", marginTop: "20px" }}>
+    <button
+      className="search-button"
+      onClick={() => setVisibleCount(visibleCount + 8)}
+    >
+      Ver más locales
+    </button>
+  </div>
+)}
+
       </div>
   
       {/* Carrusel de promociones */}
@@ -232,7 +307,7 @@ const cardVariants = {
   centeredSlides={true}
   slidesPerView="auto"
   loop={carouselImages.length > 5}
-  autoplay={{ delay: 3000, disableOnInteraction: false }}
+  autoplay={{ delay: 10000, disableOnInteraction: false }}
   coverflowEffect={{ rotate: 0, stretch: 0, depth: 200, modifier: 3, slideShadows: false }}
   modules={[EffectCoverflow, Autoplay]}
   className="mySwiper"
@@ -247,7 +322,7 @@ const cardVariants = {
       {/* Tarjetas de información */}
       <div className="info-cards">
       {[
-        { title: "Cerca mío", iconSrc: "/ionicons/location-outline.svg", link: "https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i" },
+        { title: "Beneficios cerca de mío", iconSrc: "/ionicons/location-outline.svg", link: "https://maps.app.goo.gl/tLvusPMLHyei36gW6?g_st=i" },
         { title: "Suscribite", iconSrc: "/ionicons/mail-outline.svg", link: "https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613/" },
         { title: "Adherí tu comercio", iconSrc: "/ionicons/storefront-outline.svg", link: "/adherir" },
       ].map((item, index) => (
@@ -261,7 +336,7 @@ const cardVariants = {
         viewport={{ once: true, amount: 0.1 }}
         onViewportEnter={() => console.log(`Tarjeta ${index} visible`)}
       >
-        <Card title={item.title} iconSrc={item.iconSrc} buttonText="Ver más" link={item.link} />
+        <Card class="card-result" title={item.title} iconSrc={item.iconSrc} buttonText="Ver más" link={item.link} />
       </motion.div>
       
       ))}
@@ -275,8 +350,9 @@ const cardVariants = {
 </div>
 
     </motion.div>
-
+<div id="suscribe-section">
     <Suscribe/>
+    </div>
     </div>
   );
   
