@@ -11,27 +11,28 @@ export default function Suscribe() {
     <div className="home-container">
       <div className="text-section">
         <h3>¡Suscribite Ahora!</h3>
-        <h4>Adherite a la tarjeta de beneficios y empezá a ahorrar!!</h4>
+<h4>Adherite a la tarjeta de beneficios <b>por solo $3800</b> y empezá a ahorrar!</h4>
+
         <div className="container-button suscribe-buttons">
         <button 
           className="subscribe-btn" 
           onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613", "_blank")}
         >
-          Suscripción mensual (Tarjeta Crédito/Débito)
+          Suscripción mensual $3800 (Tarjeta Crédito/Débito)
         </button>
 
                 <button 
           className="subscribe-btn" 
           onClick={() => window.open("https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849198d2f501919f4979250295", "_blank")}
         >
-          Suscripción mensual (Mercadopago)
+          Suscripción mensual $3800 (Mercadopago)
         </button>
 
         <button 
           className="subscribe-btn" 
           onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/S9OI2GLCES8QDDDMIG", "_blank")}
         >
-          Suscripción semestral (PROMO!!)
+          Suscripción semestral $3200 (PROMO!!)
         </button>
       </div>
       </div>
