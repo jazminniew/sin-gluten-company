@@ -191,17 +191,7 @@
   transform: scale(1.1);
 }
 
-/* Cartas de informacion*/
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas en una fila */
-  gap: 40px; 
-  max-width: 600px;
-  margin: 40px auto;
-  align-items: center;
-  justify-content: center;
-  margin: 100px 0;
-}
+
 
 .card {
     background: #ffffff;
@@ -227,12 +217,14 @@
 @media (max-width: 480px) {
   .info-cards {
       grid-template-columns: repeat(1, 1fr); /* 1 columna en móviles */
+      margin-left: -30px;
   }
 }
 
 @media (max-width: 600px) {
 .info-cards {
-grid-template-columns: repeat(1, 1fr); 
+grid-template-columns: repeat(1, 1fr);
+margin-left: -40px; 
 }
 }
 .grid-links {
@@ -783,4 +775,13 @@ text-decoration: underline;
 @media (max-width: 480px) {
   .search-box { width: 100%; }
   .search-location span { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .image-wrapper {
+    border-radius: 20px; /* Reducir el border-radius para pantallas pequeñas */
+  }
+
+  .rounded-image {
+    border-radius: 20px; /* Asegurar que la imagen interna también se ajuste */
+  }
 }
