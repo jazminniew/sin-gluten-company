@@ -18,14 +18,14 @@ export default function Suscribe() {
           className="subscribe-btn" 
           onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/JCGX17SI64RH3KM613", "_blank")}
         >
-          Suscripción mensual $3800 (Tarjeta Crédito/Débito)
+          Suscripción mensual $4900 (Tarjeta Crédito/Débito)
         </button>
 
                 <button 
           className="subscribe-btn" 
           onClick={() => window.open("https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849198d2f501919f4979250295", "_blank")}
         >
-          Suscripción mensual $3800 (Mercadopago)
+          Suscripción mensual $4900 (Mercadopago)
         </button>
 
         <button 
