@@ -136,6 +136,7 @@ const getOptions = (excelKey, filters = selectedFilters) => {
     if (changed) {
       setSelectedFilters(updatedFilters);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters, data, category]);
 
   // Actualiza los datos filtrados
@@ -143,6 +144,7 @@ const getOptions = (excelKey, filters = selectedFilters) => {
     const filtered = getFilteredDataWithFilters();
     setFilteredData(filtered);
     setVisibleRows(INITIAL_ROWS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters, data, category]);
 
   // Si se borra (la X) un filtro, reinicia TODOS los filtros

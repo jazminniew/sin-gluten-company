@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from "../Images/logo.png"; 
@@ -8,9 +5,8 @@ import BtnSolicita from './BtnSolicita';
 import SocialMedia from './SocialMedia';
 
 export default function Header() {
-  
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   const menuItems = [
     { label: 'Adherí tu Comercio', route: '/adherir-comercio' },
     { label: 'Viandas/Comidas Congeladas', route: '/category/viandas-comidas-congeladas' },

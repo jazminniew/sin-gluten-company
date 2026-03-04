@@ -1,9 +1,7 @@
 import React from "react";
 import "./infoSGC.css";
-import userIcon from "../Images/user.png";
 import glutenFreeIcon from "../Images/glutenFreeIcon.png";
 import moneyIcon from "../Images/money.png";
-import healthIcon from "../Images/health.png";
 
 const InfoSGC = () => {
   return (
