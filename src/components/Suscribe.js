@@ -11,7 +11,7 @@ export default function Suscribe() {
     <div className="home-container">
       <div className="text-section">
         <h3>¡Suscribite Ahora!</h3>
-<h4>Adherite a la tarjeta de beneficios <b>por solo $3800</b> y empezá a ahorrar!</h4>
+<h4>Adherite a la tarjeta de beneficios <b>por solo $4900</b> y empezá a ahorrar!</h4>
 
         <div className="container-button suscribe-buttons">
         <button 
