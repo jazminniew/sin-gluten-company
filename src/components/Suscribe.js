@@ -32,7 +32,7 @@ export default function Suscribe() {
           className="subscribe-btn" 
           onClick={() => window.open("https://fresapagos.com/p/subscriptions/subscribe/S9OI2GLCES8QDDDMIG", "_blank")}
         >
-          Suscripción semestral $3200 (PROMO!!)
+          Suscripción semestral $3800 (PROMO!!)
         </button>
       </div>
       </div>
