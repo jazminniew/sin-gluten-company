@@ -23,7 +23,7 @@ export default function Suscribe() {
 
                 <button 
           className="subscribe-btn" 
-          onClick={() => window.open("https://mpago.li/2rCP8VQ  ")}
+          onClick={() => window.open("https://mpago.li/2rCP8VQ")}
         >
           PROMO ANUAL (Pago único) $35000 (Rapipago/Tarjetas/Mercadopago)
         </button>
