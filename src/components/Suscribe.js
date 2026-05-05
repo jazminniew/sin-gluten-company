@@ -23,9 +23,9 @@ export default function Suscribe() {
 
                 <button 
           className="subscribe-btn" 
-          onClick={() => window.open("https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849198d2f501919f4979250295", "_blank")}
+          onClick={() => window.open("https://mpago.li/2rCP8VQ  ")}
         >
-          Suscripción mensual $4900 (Mercadopago)
+          PROMO ANUAL (Pago único) $35000 (Rapipago/Tarjetas/Mercadopago)
         </button>
 
         <button 
